@@ -7,14 +7,21 @@ import XCTest
 
 class TestWeather : XCTestCase {
 
-    
     func testGetWeather () {
         
-        let weather = Weather(username: "91784f91-1470-4ab8-bd5e-8f994decbde2", password: "0DDWvS44Im")
+        let username = Credentials.weatherUsername
+        let password = Credentials.weatherPassword
+        
+        let weather = Weather(username: username, password: password)
         let failure = { (error: NSError) in print(error) }
         
-        weather.getCurrentWeather(units: "e", geocode: "24.53,84.50", language: "en-US", failure: failure) { response in
+        weather.getCurrentWeather(units: "e", geocode: "24.53,84.50", language: "en-US", failure: failure) {
+            response in
+            
             print(response)
+            
+            
+            XCTAssertNotNil(response)
         }
         
     }
