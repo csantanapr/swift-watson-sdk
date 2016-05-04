@@ -1,4 +1,5 @@
 import KituraNet
+import SwiftyJSON
 import Foundation
 
 public enum Method: String {
@@ -16,8 +17,9 @@ public class RestRequest {
     private let messageBody: NSData?
     private let username: String?
     private let password: String?
+    private let domain = "com.ibm.swift.rest-kit"
 
-    public func execute(callback: ClientRequestCallback) {
+    public func response(callback: ClientRequestCallback) {
     
         // construct url with query parameters
         let urlComponents = NSURLComponents(string: self.url)!
@@ -79,6 +81,32 @@ public class RestRequest {
 
         // construct and execute HTTP request
         Http.request(options, callback: callback).end()
+    }
+
+    public func responseJSON(callback: Result<JSON, NSError> -> Void) {
+
+        self.response { r in
+            guard let response = r where response.statusCode == HttpStatusCode.OK else {
+                let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                callback(.Failure(error))
+                return
+            }
+
+            do {
+                let body = NSMutableData()
+                try response.readAllData(into: body)
+                let json = JSON(data: body)
+                callback(.Success(json))
+            } catch {
+                let failureReason = "Could not parse response data."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                callback(.Failure(error))
+                return
+            }
+        }
     }
 
     public init(
