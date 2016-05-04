@@ -1,6 +1,6 @@
 import SwiftyJSON
 
-public struct Observation {
+public struct CurrentObservation {
 
     /// Data identifier.
     public let data_class: String
@@ -284,11 +284,6 @@ public struct Observation {
     /// Rolling 7-day liquid precipitation. This field will be null outside
     /// of CONUS.
     public let precip_7day: Double?
-  
-
-
-
-    // private var measurementString: String = "imperial"
 
     public init(json: JSON) {
         data_class = json["class"].stringValue

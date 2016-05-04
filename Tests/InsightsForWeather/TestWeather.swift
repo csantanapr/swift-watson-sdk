@@ -1,29 +1,83 @@
+import InsightsForWeather
 
 import Foundation
 import XCTest
 
-@testable import InsightsForWeather
+class TestWeather: XCTestCase {
 
-
-class TestWeather : XCTestCase {
-
-    func testGetWeather () {
+    func testGet10DayForecast() {
         
         let username = Credentials.weatherUsername
         let password = Credentials.weatherPassword
         
-        let weather = Weather(username: username, password: password)
+        let insightsForWeather = InsightsForWeather(username: username, password: password)
         let failure = { (error: NSError) in print(error) }
         
-        weather.getCurrentWeather(units: "e", geocode: "24.53,84.50", language: "en-US", failure: failure) {
+        insightsForWeather.get10DayForecast(
+            units: "e",
+            geocode: "24.53,84.50",
+            language: "en-US",
+            failure: failure)
+        {
             response in
-            
             print(response)
-            
-            
-            XCTAssertNotNil(response)
         }
-        
     }
-    
+
+    func testGet24HourForecast() {
+        
+        let username = Credentials.weatherUsername
+        let password = Credentials.weatherPassword
+        
+        let insightsForWeather = InsightsForWeather(username: username, password: password)
+        let failure = { (error: NSError) in print(error) }
+        
+        insightsForWeather.get24HourForecast(
+            units: "e",
+            geocode: "24.53,84.50",
+            language: "en-US",
+            failure: failure)
+        {
+            response in
+            print(response)
+        }
+    }
+
+    func testGetCurrentForecast() {
+        
+        let username = Credentials.weatherUsername
+        let password = Credentials.weatherPassword
+        
+        let insightsForWeather = InsightsForWeather(username: username, password: password)
+        let failure = { (error: NSError) in print(error) }
+        
+        insightsForWeather.getCurrentForecast(
+            units: "e",
+            geocode: "24.53,84.50",
+            language: "en-US",
+            failure: failure)
+        {
+            response in
+            print(response)
+        }
+    }
+
+    func testGetTimeSeries() {
+        
+        let username = Credentials.weatherUsername
+        let password = Credentials.weatherPassword
+        
+        let insightsForWeather = InsightsForWeather(username: username, password: password)
+        let failure = { (error: NSError) in print(error) }
+        
+        insightsForWeather.getTimeSeries(
+            units: "e",
+            geocode: "24.53,84.50",
+            language: "en-US",
+            failure: failure)
+        {
+            response in
+            print(response)
+        }
+    }
 }
