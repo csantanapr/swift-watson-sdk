@@ -40,27 +40,10 @@ public class InsightsForWeather {
             password: password)
 
         // execute REST request
-        request.execute() { r in
-            guard let response = r where response.statusCode == HttpStatusCode.OK else {
-                let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
-            }
-
-            do {
-                let body = NSMutableData()
-                try response.readAllData(into: body)
-                let json = JSON(data: body)
-                let forecastDailyResult = ForecastDailyResult(json: json)
-                success(forecastDailyResult)
-            } catch {
-                let failureReason = "Could not parse response data."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
+        request.responseJSON { response in
+            switch response {
+            case .Success(let json): success(ForecastDailyResult(json: json))
+            case .Failure(let error): failure?(error)
             }
         }
     }
@@ -88,32 +71,13 @@ public class InsightsForWeather {
             password: password)
 
         // execute REST request
-        request.execute() { r in
-            guard let response = r where response.statusCode == HttpStatusCode.OK else {
-                let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
-            }
-
-            do {
-                let body = NSMutableData()
-                try response.readAllData(into: body)
-                let json = JSON(data: body)
-                let forecastHourlyResult = ForecastHourlyResult(json: json)
-                success(forecastHourlyResult)
-            } catch {
-                let failureReason = "Could not parse response data."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
+        request.responseJSON { response in
+            switch response {
+            case .Success(let json): success(ForecastHourlyResult(json: json))
+            case .Failure(let error): failure?(error)
             }
         }
     }
-
-
 
     public func getCurrentForecast(
         units: String,
@@ -138,27 +102,10 @@ public class InsightsForWeather {
             password: password)
 
         // execute REST request
-        request.execute() { r in
-            guard let response = r where response.statusCode == HttpStatusCode.OK else {
-                let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
-            }
-
-            do {
-                let body = NSMutableData()
-                try response.readAllData(into: body)
-                let json = JSON(data: body)
-                let currentObservationResult = CurrentObservationResult(json: json)
-                success(currentObservationResult)
-            } catch {
-                let failureReason = "Could not parse response data."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
+        request.responseJSON { response in
+            switch response {
+            case .Success(let json): success(CurrentObservationResult(json: json))
+            case .Failure(let error): failure?(error)
             }
         }
     }
@@ -186,27 +133,10 @@ public class InsightsForWeather {
             password: password)
 
         // execute REST request
-        request.execute() { r in
-            guard let response = r where response.statusCode == HttpStatusCode.OK else {
-                let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
-            }
-
-            do {
-                let body = NSMutableData()
-                try response.readAllData(into: body)
-                let json = JSON(data: body)
-                let timeSeriesResult = TimeSeriesResult(json: json)
-                success(timeSeriesResult)
-            } catch {
-                let failureReason = "Could not parse response data."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
+        request.responseJSON { response in
+            switch response {
+            case .Success(let json): success(TimeSeriesResult(json: json))
+            case .Failure(let error): failure?(error)
             }
         }
     }
