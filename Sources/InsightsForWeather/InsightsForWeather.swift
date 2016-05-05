@@ -21,7 +21,7 @@ public class InsightsForWeather {
         units: String,
         geocode: String,
         language: String,
-        failure: (NSError -> Void)? = nil,
+        failure: (RestError -> Void)? = nil,
         success: ForecastDailyResult -> Void)
     {
         // construct query parameters
@@ -42,8 +42,8 @@ public class InsightsForWeather {
         // execute REST request
         request.responseJSON { response in
             switch response {
-            case .Success(let json): success(ForecastDailyResult(json: json))
-            case .Failure(let error): failure?(error)
+            case .success(let json): success(ForecastDailyResult(json: json))
+            case .failure(let error): failure?(error)
             }
         }
     }
@@ -52,7 +52,7 @@ public class InsightsForWeather {
         units: String,
         geocode: String,
         language: String,
-        failure: (NSError -> Void)? = nil,
+        failure: (RestError -> Void)? = nil,
         success: ForecastHourlyResult -> Void)
     {
         // construct query parameters
@@ -73,8 +73,8 @@ public class InsightsForWeather {
         // execute REST request
         request.responseJSON { response in
             switch response {
-            case .Success(let json): success(ForecastHourlyResult(json: json))
-            case .Failure(let error): failure?(error)
+            case .success(let json): success(ForecastHourlyResult(json: json))
+            case .failure(let error): failure?(error)
             }
         }
     }
@@ -83,7 +83,7 @@ public class InsightsForWeather {
         units: String,
         geocode: String,
         language: String,
-        failure: (NSError -> Void)? = nil,
+        failure: (RestError -> Void)? = nil,
         success: CurrentObservationResult -> Void)
     {
         // construct query parameters
@@ -104,8 +104,8 @@ public class InsightsForWeather {
         // execute REST request
         request.responseJSON { response in
             switch response {
-            case .Success(let json): success(CurrentObservationResult(json: json))
-            case .Failure(let error): failure?(error)
+            case .success(let json): success(CurrentObservationResult(json: json))
+            case .failure(let error): failure?(error)
             }
         }
     }
@@ -114,7 +114,7 @@ public class InsightsForWeather {
         units: String,
         geocode: String,
         language: String,
-        failure: (NSError -> Void)? = nil,
+        failure: (RestError -> Void)? = nil,
         success: TimeSeriesResult -> Void)
     {
         // construct query parameters
@@ -135,8 +135,8 @@ public class InsightsForWeather {
         // execute REST request
         request.responseJSON { response in
             switch response {
-            case .Success(let json): success(TimeSeriesResult(json: json))
-            case .Failure(let error): failure?(error)
+            case .success(let json): success(TimeSeriesResult(json: json))
+            case .failure(let error): failure?(error)
             }
         }
     }

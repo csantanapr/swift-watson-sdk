@@ -83,14 +83,15 @@ public class RestRequest {
         Http.request(options, callback: callback).end()
     }
 
-    public func responseJSON(callback: Result<JSON, NSError> -> Void) {
+    public func responseJSON(callback: Result<JSON, RestError> -> Void) {
 
         self.response { r in
             guard let response = r where response.statusCode == HttpStatusCode.OK else {
                 let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                callback(.Failure(error))
+                //let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                //let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                let error = RestError.badResponse(failureReason)
+                callback(.failure(error))
                 return
             }
 
@@ -98,12 +99,11 @@ public class RestRequest {
                 let body = NSMutableData()
                 try response.readAllData(into: body)
                 let json = JSON(data: body)
-                callback(.Success(json))
+                callback(.success(json))
             } catch {
                 let failureReason = "Could not parse response data."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                callback(.Failure(error))
+                let error = RestError.badData(failureReason)
+                callback(.failure(error))
                 return
             }
         }

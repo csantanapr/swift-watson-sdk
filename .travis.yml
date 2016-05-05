@@ -17,8 +17,9 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzvf swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a-ubuntu14.04-dispatch.tar.gz    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:"${PATH}"    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a-ubuntu14.04/usr/bin:$PATH    ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -y install clang libicu-dev libkqueue-dev libtool libcurl4-openssl-dev    ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -y install clang libicu-dev libkqueue-dev libtool libcurl4-openssl-dev libbsd-dev libblocksruntime-dev   ; fi
 
 script:
-    - swift build -Xcc -fblocks
-    - swift test
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build -Xcc -fblocks -Xlinker -rpath -Xlinker .build/debug ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then swift build ; fi
+  - swift test
