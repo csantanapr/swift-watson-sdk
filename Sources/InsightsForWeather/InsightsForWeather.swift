@@ -17,6 +17,28 @@ public class InsightsForWeather {
         self.password = password
     }
 
+    /**
+     Returns weather forecasts for the current day and the next nine days for a geolocation. Each 
+     daily forecast can contain a daytime forecast and a nighttime forecast.  These segments are 
+     separate objects in the JSON responses. Daytime forecast data of the daily forecast are no 
+     longer available after 3:00 PM local time.  At 3:00 pm local time, your application must no 
+     longer display the day forecast.
+     
+     - parameter units:    The optional units to return the response in. The API supports English (e), 
+     Metric (m), and UK-Hybrid (h) units of measure. If you supply the units of measure but don't 
+     supply a value, the API returns the data in the unit of measure that corresponds to the language 
+     code. The default or requested unit of measure is returned in the units parameter in the metadata 
+     of the response.
+     - parameter geocode:  The optional latitude and longitude, for example, "45.4214,75.6919" 
+     represents Ottawa, Canada. If you supply a geocode coordinate, the API returns data for the 
+     closest location available. Periods are used as decimal separators and commas are used to 
+     separate latitude and longitude values. If you supply a geocode, the actual latitude and 
+     longitude values that are used are returned in the metadata of the response.
+     - parameter language: The language to return the response in. The default is en-US. The default or 
+     requested translation language is returned in the language parameter in the metadata of the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of available standard and custom models.
+     */
     public func get10DayForecast(
         units: String,
         geocode: String,
@@ -48,6 +70,26 @@ public class InsightsForWeather {
         }
     }
 
+    /**
+     Returns an hourly forecast for the current day and the next 24 hours for a geolocation. The hourly 
+     forecast data can contain up to 24 hourly forecasts for each location.  You must discard all 
+     previous hourly forecasts for a location when new data is received
+     
+     - parameter units:    The optional units to return the response in. The API supports English (e),
+     Metric (m), and UK-Hybrid (h) units of measure. If you supply the units of measure but don't
+     supply a value, the API returns the data in the unit of measure that corresponds to the language
+     code. The default or requested unit of measure is returned in the units parameter in the metadata
+     of the response.
+     - parameter geocode:  The optional latitude and longitude, for example, "45.4214,75.6919"
+     represents Ottawa, Canada. If you supply a geocode coordinate, the API returns data for the
+     closest location available. Periods are used as decimal separators and commas are used to
+     separate latitude and longitude values. If you supply a geocode, the actual latitude and
+     longitude values that are used are returned in the metadata of the response.
+     - parameter language: The language to return the response in. The default is en-US. The default or
+     requested translation language is returned in the language parameter in the metadata of the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of available standard and custom models.
+     */
     public func get24HourForecast(
         units: String,
         geocode: String,
@@ -79,6 +121,28 @@ public class InsightsForWeather {
         }
     }
 
+    /**
+     Returns the current weather conditions for a geolocation. These recent observations are retained 
+     in the database up to 10 minutes on specific reporting stations and 24 hours of observations 
+     per station. The recent observations data is continuously updated and replaced with a 
+     first-in / first-out methodology (rotating data with newest observation and moving the oldest 
+     observations to the archive storage) based on date/time stamping of the observations.
+     
+     - parameter units:    The optional units to return the response in. The API supports English (e),
+     Metric (m), and UK-Hybrid (h) units of measure. If you supply the units of measure but don't
+     supply a value, the API returns the data in the unit of measure that corresponds to the language
+     code. The default or requested unit of measure is returned in the units parameter in the metadata
+     of the response.
+     - parameter geocode:  The optional latitude and longitude, for example, "45.4214,75.6919"
+     represents Ottawa, Canada. If you supply a geocode coordinate, the API returns data for the
+     closest location available. Periods are used as decimal separators and commas are used to
+     separate latitude and longitude values. If you supply a geocode, the actual latitude and
+     longitude values that are used are returned in the metadata of the response.
+     - parameter language: The language to return the response in. The default is en-US. The default or
+     requested translation language is returned in the language parameter in the metadata of the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of available standard and custom models.
+     */
     public func getCurrentForecast(
         units: String,
         geocode: String,
@@ -110,6 +174,26 @@ public class InsightsForWeather {
         }
     }
 
+    /**
+     Returns both the current observations and up to 24 hours of past observations, from the current 
+     date and time, for a geolocation. Weather observations are gathered from physical devices 
+     deployed worldwide, and the current weather observations.
+     
+     - parameter units:    The optional units to return the response in. The API supports English (e),
+     Metric (m), and UK-Hybrid (h) units of measure. If you supply the units of measure but don't
+     supply a value, the API returns the data in the unit of measure that corresponds to the language
+     code. The default or requested unit of measure is returned in the units parameter in the metadata
+     of the response.
+     - parameter geocode:  The optional latitude and longitude, for example, "45.4214,75.6919"
+     represents Ottawa, Canada. If you supply a geocode coordinate, the API returns data for the
+     closest location available. Periods are used as decimal separators and commas are used to
+     separate latitude and longitude values. If you supply a geocode, the actual latitude and
+     longitude values that are used are returned in the metadata of the response.
+     - parameter language: The language to return the response in. The default is en-US. The default or
+     requested translation language is returned in the language parameter in the metadata of the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of available standard and custom models.
+     */
     public func getTimeSeries(
         units: String,
         geocode: String,
