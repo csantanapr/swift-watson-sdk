@@ -124,9 +124,12 @@ public struct CurrentObservation {
     /// audio narratives of the forecase period (TWC use only).
     public let vocal_key: String?
     
+    /// The specific measurements that are based off the units type such as temperature which is different for metric vs 
     public let measurement:Measurement?
     
+    
     private var unit:String = "imperial"
+    
     
     public init(json: JSON) {
         data_class = json["class"].stringValue
