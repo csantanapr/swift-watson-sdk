@@ -1,5 +1,6 @@
 import SwiftyJSON
 
+// Insight for Weather 24HourForecast request object
 public struct ForecastHourly {
 
     /// Data identifier.
@@ -183,6 +184,7 @@ public struct ForecastHourly {
     /// display such as using red font on weather.com.
     public let severity: Int?
 
+    /// Used internally to initialize a `CurrentObservation` model from JSON.
     public init(json: JSON) {
         data_class = json["class"].stringValue
         expire_time_gmt = json["expire_time_gmt"].intValue

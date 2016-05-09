@@ -1,5 +1,6 @@
 import SwiftyJSON
 
+// Insight for Weather 10DayForecast request object
 public struct ForecastDaily {
 
     /// Data identifier.
@@ -111,6 +112,7 @@ public struct ForecastDaily {
     /// Daily - Nighttime.
     public let night: Daily?
 
+    /// Used internally to initialize a `CurrentObservation` model from JSON.
     public init(json: JSON) {
         data_class = json["class"].stringValue
         expire_time_gmt = json["expire_time_gmt"].intValue

@@ -1,5 +1,6 @@
 import SwiftyJSON
 
+// Insight for Weather request object
 public struct Metadata {
 
     /// The version number of the API.
@@ -24,6 +25,7 @@ public struct Metadata {
     /// (UOM) for various numeric values.
     public let units: String
 
+    /// Used internally to initialize a `CurrentObservation` model from JSON.
     public init(json: JSON) {
         version = json["version"].stringValue
         transaction_id = json["transaction_id"].stringValue

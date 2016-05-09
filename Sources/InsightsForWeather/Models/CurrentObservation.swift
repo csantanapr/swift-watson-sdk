@@ -1,5 +1,7 @@
 import SwiftyJSON
 
+
+// Insight for Weather CurrentForecast request object
 public struct CurrentObservation {
     
     /// Data identifier.
@@ -124,13 +126,15 @@ public struct CurrentObservation {
     /// audio narratives of the forecase period (TWC use only).
     public let vocal_key: String?
     
-    /// The specific measurements that are based off the units type such as temperature which is different for metric vs 
+    /// The specific measurements that are based off the units type such as temperature which is 
+    // different for Metric vs. English
     public let measurement:Measurement?
     
-    
+    /// The units of measure to return the data in (for example, e=Imperial(English), m=Metric, 
+    /// h=Hybrid). Some APIs require the units of measure.
     private var unit:String = "imperial"
     
-    
+    /// Used internally to initialize a `CurrentObservation` model from JSON.
     public init(json: JSON) {
         data_class = json["class"].stringValue
         expire_time_gmt = json["expire_time_gmt"].intValue

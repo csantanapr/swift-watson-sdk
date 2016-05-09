@@ -1,5 +1,6 @@
 import SwiftyJSON
 
+// Insight for Weather TimeSeries request object
 public struct TimeSeriesObservation {
 
     /// Primary data field to group or access data for. Range: Same as observation station id.
@@ -161,6 +162,7 @@ public struct TimeSeriesObservation {
     /// Range: Extreme, High, Low, Minimal, Moderate, No Report, Not Available.
     public let uv_desc: String?
 
+    /// Used internally to initialize a `CurrentObservation` model from JSON.
     public init(json: JSON) {
         key = json["key"].stringValue
         data_class = json["class"].stringValue

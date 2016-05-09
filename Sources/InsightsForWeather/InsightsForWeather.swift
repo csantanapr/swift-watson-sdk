@@ -4,6 +4,12 @@ import SwiftyJSON
 
 import Foundation
 
+/**
+ IBM Insights for Weather to integrate historical and real-time weather data from The Weather Company 
+ into your IBM Bluemix applications. This service lets you retrieve weather data for an area specified 
+ by a geolocation. The data allows you to forecast, detect, and visualize disruptive weather events 
+ that might affect decision making in your application.
+*/
 public class InsightsForWeather {
 
     private let username: String
@@ -12,6 +18,7 @@ public class InsightsForWeather {
     private let serviceURL = "https://twcservice.mybluemix.net/api/weather"
     private let domain = "com.ibm.swift.weather"
 
+    /// Used to initialize a `InsightsForWeather` object using username and password for authentication.
     public init(username: String, password: String) {
         self.username = username
         self.password = password
@@ -40,16 +47,16 @@ public class InsightsForWeather {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func get10DayForecast(
-        units: String,
-        geocode: String,
+        units: String?,
+        geocode: String?,
         language: String,
         failure: (RestError -> Void)? = nil,
         success: ForecastDailyResult -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "units", value: units))
-        queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))
+        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
+        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
         queryParameters.append(NSURLQueryItem(name: "language", value: language))
 
         // construct REST request
@@ -91,16 +98,16 @@ public class InsightsForWeather {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func get24HourForecast(
-        units: String,
-        geocode: String,
+        units: String?,
+        geocode: String?,
         language: String,
         failure: (RestError -> Void)? = nil,
         success: ForecastHourlyResult -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "units", value: units))
-        queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))
+        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
+        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
         queryParameters.append(NSURLQueryItem(name: "language", value: language))
 
         // construct REST request
@@ -144,16 +151,16 @@ public class InsightsForWeather {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func getCurrentForecast(
-        units: String,
-        geocode: String,
+        units: String?,
+        geocode: String?,
         language: String,
         failure: (RestError -> Void)? = nil,
         success: CurrentObservationResult -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "units", value: units))
-        queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))
+        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
+        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
         queryParameters.append(NSURLQueryItem(name: "language", value: language))
 
         // construct REST request
@@ -195,16 +202,16 @@ public class InsightsForWeather {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func getTimeSeries(
-        units: String,
-        geocode: String,
+        units: String?,
+        geocode: String?,
         language: String,
         failure: (RestError -> Void)? = nil,
         success: TimeSeriesResult -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "units", value: units))
-        queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))
+        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
+        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
         queryParameters.append(NSURLQueryItem(name: "language", value: language))
 
         // construct REST request

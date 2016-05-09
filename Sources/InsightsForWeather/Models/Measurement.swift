@@ -1,5 +1,6 @@
 import SwiftyJSON
 
+// Insight for Weather CurrentForecast request object
 public struct Measurement {
 
     /// The wind is treated as a vector, therefore, winds must have direction
@@ -162,7 +163,8 @@ public struct Measurement {
     /// Rolling 7-day liquid precipitation. This field will be null outside
     /// of CONUS.
     public let precip_7day: Double?
-    
+
+    /// Used internally to initialize a `CurrentObservation` model from JSON.
     public init(json: JSON) {
         wspd = json["wspd"].int
         gust = json["gust"].int
