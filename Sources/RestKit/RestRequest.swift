@@ -63,30 +63,30 @@ public class RestRequest {
 
         // construct client request options
         var options = [ClientRequestOptions]()
-        options.append(.Method(method.rawValue))
-        options.append(.Headers(headers))
-        options.append(.Schema(scheme + "://"))
-        options.append(.Hostname(hostname))
+        options.append(.method(method.rawValue))
+        options.append(.headers(headers))
+        options.append(.schema(scheme + "://"))
+        options.append(.hostname(hostname))
         if let query = urlComponents.percentEncodedQuery {
-            options.append(.Path(path + "?" + query))
+            options.append(.path(path + "?" + query))
         } else {
-            options.append(.Path(path))
+            options.append(.path(path))
         }
         if let username = username {
-            options.append(.Username(username))
+            options.append(.username(username))
         }
         if let password = password {
-            options.append(.Password(password))
+            options.append(.password(password))
         }
 
         // construct and execute HTTP request
-        Http.request(options, callback: callback).end()
+        HTTP.request(options, callback: callback).end()
     }
 
     public func responseJSON(callback: Result<JSON, RestError> -> Void) {
 
         self.response { r in
-            guard let response = r where response.statusCode == HttpStatusCode.OK else {
+            guard let response = r where response.statusCode == HTTPStatusCode.OK else {
                 let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
                 //let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                 //let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
