@@ -15,9 +15,16 @@
  **/
 
 import Foundation
+import SwiftyJSON
 
-public enum RestError: ErrorProtocol {
-    case badResponse(String)
-    case badData(String)
-    case unknown
+/** A hierarchy of categories for a given object in the Alchemy Knowledge Graph. */
+public struct KnowledgeGraph {
+
+    /// A hierarchy of categories for the given object.
+    public let typeHierarchy: String
+
+    /// Used internally to initialize a `KnowledgeGraph` model from JSON.
+    public init(json: JSON) {
+        typeHierarchy = json["typeHierarchy"].stringValue
+    }
 }
