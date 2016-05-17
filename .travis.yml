@@ -8,7 +8,8 @@ matrix:
       osx_image: xcode7.3
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_a6399d1c22a9_key -iv $encrypted_a6399d1c22a9_iv -in Tests/InsightsForWeather/Credentials.swift.enc -out Tests/InsightsForWeather/Credentials.swift -d
+  - openssl aes-256-cbc -K $encrypted_a508278baa21_key -iv $encrypted_a508278baa21_iv -in Tests/InsightsForWeather/Credentials.swift.enc -out Tests/InsightsForWeather/Credentials.swift -d
+  - openssl aes-256-cbc -K $encrypted_a508278baa21_key -iv $encrypted_a508278baa21_iv -in Tests/AlchemyVision/Credentials.swift.enc -out Tests/AlchemyVision/Credentials.swift -d
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update   ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install http-parser curl  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://swift.org/builds/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2016-05-03-a/swift-DEVELOPMENT-SNAPSHOT-2016-05-03-a-osx.pkg    ; fi
