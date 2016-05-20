@@ -25,10 +25,7 @@ public struct TimeSeriesResult {
 
     /// Used internally to initialize a `CurrentObservation` model from JSON.
     public init(json: JSON) {
-        metadata = Metadata(json: json["metadata"])
-        
+        metadata = Metadata(json: json["metadata"])        
         observation = json["observations"].arrayValue.map(TimeSeriesObservation.init)
-        
-        // observation = TimeSeriesObservation(json: json["observations"])
     }
 }
