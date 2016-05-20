@@ -56,7 +56,7 @@ public class TestWeather: XCTestCase {
             failure: failure)
         {
             response in
-            print(response)
+            XCTAssertGreaterThanOrEqual(response.forecasts.count, 10)
             expect.fulfill()
         }
         
@@ -80,7 +80,7 @@ public class TestWeather: XCTestCase {
             failure: failure)
         {
             response in
-            print(response)
+            XCTAssertGreaterThanOrEqual(response.forecasts.count, 24)
             expect.fulfill()
         }
         
@@ -104,7 +104,7 @@ public class TestWeather: XCTestCase {
             failure: failure)
         {
             response in
-            print(response)
+            XCTAssertGreaterThanOrEqual(response.observation.measurement!.temp, -50)
             expect.fulfill()
         }
         
@@ -128,7 +128,7 @@ public class TestWeather: XCTestCase {
             failure: failure)
         {
             response in
-            print(response)
+            XCTAssertGreaterThanOrEqual(response.observation.count, 10)
             expect.fulfill()
         }
         

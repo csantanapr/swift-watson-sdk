@@ -16,19 +16,21 @@
 
 import SwiftyJSON
 
-// Insight for Weather TimeSeries request object
-public struct TimeSeriesResult {
+/** The primary image link detected on a webpage by the Alchemy Vision service. */
+public struct ImageLink {
 
-    /// A specific set of properties that span accross all weather calls.
-    public let metadata: Metadata
-    public let observation: [TimeSeriesObservation]
+    /// The status of the request.
+    public let status: String
 
-    /// Used internally to initialize a `CurrentObservation` model from JSON.
+    /// The URL of the requested source.
+    public let url: String
+
+    /// The URL of the primary image.
+    public let image: String
+
     public init(json: JSON) {
-        metadata = Metadata(json: json["metadata"])
-        
-        observation = json["observations"].arrayValue.map(TimeSeriesObservation.init)
-        
-        // observation = TimeSeriesObservation(json: json["observations"])
+        status = json["status"].stringValue
+        url = json["url"].stringValue
+        image = json["image"].stringValue
     }
 }

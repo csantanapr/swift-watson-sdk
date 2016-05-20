@@ -93,4 +93,132 @@ public class AlchemyVision {
             }
         }
     }
+    
+    /**
+     Perform face recognition on an uploaded image. For each face detected, the service returns
+     the estimated bounding box, gender, age, and name (if a celebrity is detected).
+     
+     - parameter image: The image file (.jpg, .png, or .gif) on which to perform face recognition.
+     - parameter knowledgeGraph: Should additional metadata be provided for detected celebrities?
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected faces.
+     */
+    public func getRankedImageFaceTags(
+        url: String,
+        forceShowAll: Bool? = nil,
+        knowledgeGraph: Bool? = nil,
+        failure: (RestError -> Void)? = nil,
+        success: FaceTags -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        
+        if let forceShowAll = forceShowAll {
+            if forceShowAll {
+                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "1"))
+            } else {
+                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "0"))
+            }
+        }
+        if let knowledgeGraph = knowledgeGraph {
+            if knowledgeGraph {
+                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "1"))
+            } else {
+                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "0"))
+            }
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/url/URLGetRankedImageFaceTags",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        request.responseJSON { response in
+            switch response {
+            // case .success(let json): success(FaceTags(json: json))
+            case .success(let json):
+                success(FaceTags(json: json))
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+
+    /**
+     Identify the primary image at a given URL.
+     
+     - parameter url: The URL of a webpage on which the primary image shall be identified.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the identified primary image.
+     */
+    public func getImage(
+        url: String,
+        failure: (RestError -> Void)? = nil,
+        success: ImageLink -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/url/URLGetImage",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        request.responseJSON { response in
+            switch response {
+            case .success(let json): success(ImageLink(json: json))
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Identify text in the primary image at a given URL.
+     
+     - parameter url: The URL at which to perform text detection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the detected text.
+     */
+    public func getRankedImageSceneText(
+        url: String,
+        failure: (RestError -> Void)? = nil,
+        success: SceneText -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/url/URLGetRankedImageSceneText",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+        
+        // execute REST requeset
+        request.responseJSON { response in
+            switch response {
+            case .success(let json): success(SceneText(json: json))
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
 }

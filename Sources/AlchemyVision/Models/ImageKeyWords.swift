@@ -22,27 +22,21 @@ public struct ImageKeywords {
     
     /// The status of the request.
     public let status: String
-    
+
     /// The URL of the requested image being tagged.
     public let url: String
-    
+
     /// The number of transactions charged for this request.
     public let totalTransactions: Int
-    
+
     /// Keywords for the given image.
     public let imageKeywords: [ImageKeyword]
-    
-    /// Used internally to initialize an `ImageKeywords` model from JSON.
+
     public init(json: JSON) {
         status = json["status"].stringValue
         url = json["url"].stringValue
         totalTransactions = json["totalTransactions"].intValue
-        
-        var imageKeywords: [ImageKeyword] = []
-        for value in json["imageKeywords"].arrayValue {
-            imageKeywords.insert(ImageKeyword(json: value), at: 0)
-        }
-        self.imageKeywords = imageKeywords
+        imageKeywords = json["imageKeywords"].arrayValue.map(ImageKeyword.init)
     }
 }
 
@@ -62,6 +56,10 @@ public struct ImageKeyword {
     public init(json: JSON) {
         text = json["text"].stringValue
         score = json["score"].doubleValue
-        knowledgeGraph = KnowledgeGraph(json: json["knowledgeGraph"])
+        if (json["knowledgeGraph"].exists()) {
+            knowledgeGraph = KnowledgeGraph(json: json["knowledgeGraph"])
+        } else {
+            knowledgeGraph = nil
+        }
     }
 }

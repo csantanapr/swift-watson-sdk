@@ -24,7 +24,10 @@ public class TestAlchemyVision: XCTestCase {
 
     static var allTests : [(String, TestAlchemyVision -> () throws -> Void)] {
 		return [
-            ("testGetRankedImageKeywords", testGetRankedImageKeywords)
+            ("testGetRankedImageKeywords", testGetRankedImageKeywords),
+            ("testURLRecognizeFaces", testURLRecognizeFaces),
+            ("testGetRankedImageSceneText", testGetRankedImageSceneText),
+            ("testGetImage", testGetImage)
 	    ]
 	}
 
@@ -33,7 +36,6 @@ public class TestAlchemyVision: XCTestCase {
     
     private var apiKey = ""
 
-   
     func testGetRankedImageKeywords() {
 
         let apiKey = Credentials.alchemyAPI
@@ -46,8 +48,67 @@ public class TestAlchemyVision: XCTestCase {
         let urlString = "http://hdwplan.com/wp-content/uploads/2016/01/super-sunset-wallpaper-hd.jpeg"
         
         alchemyVision.getRankedImageKeywords(url: urlString, forceShowAll: true, knowledgeGraph: true, failure: failure) { (response) in
-            print(response)
             XCTAssertGreaterThanOrEqual(response.imageKeywords.count, 6)
+            expect.fulfill()
+        }
+        
+        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+    }
+    
+    func testURLRecognizeFaces(){
+        
+        let apiKey = Credentials.alchemyAPI
+        let emptyExpectation = expectation(withDescription: "Empty")
+    //    let validExpectation = expectation(withDescription: "Valid")
+        
+        let alchemyVision = AlchemyVision(apiKey: apiKey)
+        let failure = {
+            (error: RestError) in print(error)
+        }
+        
+        let urlString = "http://paulelledge.com/wp-content/uploads/2011/09/Willie_Nelson-666x670.jpg"
+        
+        alchemyVision.getRankedImageFaceTags(url: urlString, forceShowAll: false, knowledgeGraph: false, failure: failure) { (response) in
+            XCTAssertGreaterThanOrEqual(response.imageFaces.count, 1)
+            emptyExpectation.fulfill()
+        }
+        
+        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+    }
+    
+    func testGetRankedImageSceneText(){
+        
+        let apiKey = Credentials.alchemyAPI
+        
+        let expect = expectation(withDescription: "Test GetRankedImageKeywords")
+        
+        let alchemyVision = AlchemyVision(apiKey: apiKey)
+        let failure = { (error: RestError) in print(error) }
+        
+        let urlString = "http://ivrl.epfl.ch/files/content/sites/ivrg/files/research/images/past_topics/FilteredTextDetection/DollarGlen.jpg"
+        
+        alchemyVision.getRankedImageSceneText(url: urlString, failure: failure) { (response) in
+            XCTAssertGreaterThanOrEqual(response.sceneTextLines.count, 2)
+            expect.fulfill()
+        }
+        
+        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+    }
+    
+    func testGetImage(){
+        
+        let apiKey = Credentials.alchemyAPI
+        
+        let expect = expectation(withDescription: "Test GetRankedImageKeywords")
+        
+        let alchemyVision = AlchemyVision(apiKey: apiKey)
+        let failure = { (error: RestError) in print(error) }
+        
+        let urlString = "http://www.espn.com"
+        
+        alchemyVision.getImage(url: urlString, failure: failure) { (response) in
+            XCTAssertTrue(!response.url.isEmpty)
+            XCTAssertTrue(!response.image.isEmpty)
             expect.fulfill()
         }
         
