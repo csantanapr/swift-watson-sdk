@@ -12,3 +12,4 @@ let package = Package(
         Target(name: "AlchemyVision", dependencies: [.Target(name: "RestKit")])
     ]
 )
+
