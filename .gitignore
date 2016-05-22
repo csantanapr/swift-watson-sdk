@@ -3,3 +3,4 @@
 /Packages
 /*.xcodeproj
 Tests/InsightsForWeather/Credentials.swift
+Tests/AlchemyVision/Credentials.swift
