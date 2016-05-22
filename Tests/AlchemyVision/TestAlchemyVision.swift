@@ -66,7 +66,7 @@ public class TestAlchemyVision: XCTestCase {
             (error: RestError) in print(error)
         }
         
-        let urlString = "http://paulelledge.com/wp-content/uploads/2011/09/Willie_Nelson-666x670.jpg"
+        let urlString = "http://img2.timeinc.net/people/i/2014/sandbox/news/140210/hats/willie-435x580.jpg"
         
         alchemyVision.getRankedImageFaceTags(url: urlString, forceShowAll: false, knowledgeGraph: false, failure: failure) { (response) in
             XCTAssertGreaterThanOrEqual(response.imageFaces.count, 1)
