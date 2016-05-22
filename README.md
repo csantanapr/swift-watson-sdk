@@ -1,7 +1,11 @@
 # Watson Developer Cloud Swift SDK
 
 [![Build Status](https://travis-ci.org/IBM-Swift/swift-watson-sdk.svg?branch=master)](https://travis-ci.org/IBM-Swift/swift-watson-sdk)
-[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://swift.org/)
+[![Swift 3.0](https://img.shields.io/badge/swift-3.0-orange.svg?style=flat)](https://swift.org/)
+![Mac OS X](https://img.shields.io/badge/os-Mac%20OS%20X-green.svg?style=flat)
+![Linux](https://img.shields.io/badge/os-linux-green.svg?style=flat)
+![Apache 2](https://img.shields.io/badge/license-Apache2-blue.svg?style=flat)
+
 
 > The Watson Developer Cloud Swift SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services and Analytics Insights for Weather to their Swift 3 applications.
 
