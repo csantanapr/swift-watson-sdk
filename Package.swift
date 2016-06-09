@@ -9,7 +9,9 @@ let package = Package(
     targets: [
         Target(name: "RestKit"),
         Target(name: "InsightsForWeather", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "NaturalLanguageClassifier", dependencies: [.Target(name: "RestKit")]),
         Target(name: "AlchemyVision", dependencies: [.Target(name: "RestKit")])
     ]
 )
+
 

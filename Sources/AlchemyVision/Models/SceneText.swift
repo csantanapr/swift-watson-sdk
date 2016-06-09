@@ -1,5 +1,3 @@
-import SwiftyJSON
-
 /**
  * Copyright IBM Corporation 2016
  *
@@ -15,6 +13,8 @@ import SwiftyJSON
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+import SwiftyJSON
 
 /** The text of an image detected by the Alchemy Vision service. */
 public struct SceneText {

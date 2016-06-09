@@ -96,7 +96,13 @@ public class RestRequest {
         }
 
         // construct and execute HTTP request
-        HTTP.request(options, callback: callback).end()
+        let req = HTTP.request(options, callback: callback)
+        
+        if let messageBody = messageBody {
+            req.write(from: messageBody)
+        }
+        
+        req.end()
     }
 
     public func responseJSON(callback: Result<JSON, RestError> -> Void) {
