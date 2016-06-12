@@ -64,7 +64,7 @@ public class TestNaturalLanguageClassifier: XCTestCase {
         let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
         let failure = { (error: RestError) in print(error) }
         
-        naturalLanguageClassifier.classify(classifierId: "3a84d1x62-nlc-17603", text: "how is the weather?", failure: failure) { response in
+        naturalLanguageClassifier.classify(classifierId: "3a84d1x62-nlc-2314", text: "how is the weather?", failure: failure) { response in
             XCTAssertNotEqual(response.text , "temperature")
             expect.fulfill()
         }
