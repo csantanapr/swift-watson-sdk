@@ -103,7 +103,7 @@ e.g.
 
 	let failure = { (error: RestError) in print(error) }
         
-		naturalLanguageClassifier.getClassifiers(failure: failure) { response in
+	naturalLanguageClassifier.getClassifiers(failure: failure) { response in
 
 		// code here
 	})
