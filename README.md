@@ -15,6 +15,7 @@
 * [Installation](#installation)
 * [IBM Watson Services](#ibm-watson-services)
   - [Alchemy Vision](#alchemy-vision) (partial)
+  - [Natural Language Classifier](#natural-language-classifier) (partial)
 * [IBM Data and Analytics Services](#ibm-data-and-analytics-services)
   - [Insights For Weather](#insights-for-weather)
 * [Authentication](#authentication)
@@ -75,6 +76,39 @@ e.g.
 
 })
 ```
+
+### Natural Language Classifier
+
+The IBM Watson™ Natural Language Classifier service uses machine learning algorithms to return the top matching predefined classes for short text input. You create and train a classifier to connect predefined classes to example texts so that the service can apply those classes to new inputs.
+
+##### Links
+* Natural Lanaguage Classifier API docs [here](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/natural-language-classifier/api/v1/)
+* Try out the [demo](http://natural-language-classifier-demo.mybluemix.net/)
+
+##### Usage
+Instantiate a **NaturalLanguageClassifier** object and set its username and password
+
+```swift
+
+let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+
+```
+
+
+API calls are instance methods, and model class instances are returned as part of our callback.
+
+e.g.
+
+```swift
+
+	let failure = { (error: RestError) in print(error) }
+        
+		naturalLanguageClassifier.getClassifiers(failure: failure) { response in
+
+		// code here
+	})
+```
+
 
 ## IBM Data and Analytics Services
 
