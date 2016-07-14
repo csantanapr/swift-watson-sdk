@@ -23,7 +23,7 @@ public enum Method: String {
 }
 
 public class RestRequest {
-
+    
     private let method: Method
     private let url: String
     private let acceptType: String?
@@ -34,15 +34,15 @@ public class RestRequest {
     private let username: String?
     private let password: String?
     private let domain = "com.ibm.swift.rest-kit"
-
-    public func response(callback: ClientRequestCallback) {
     
+    public func response(callback: ClientRequest.Callback) {
+        
         // construct url with query parameters
         let urlComponents = NSURLComponents(string: self.url)!
         if let queryParameters = queryParameters where !queryParameters.isEmpty {
             urlComponents.queryItems = queryParameters
         }
-
+        
         // construct headers
         var headers = [String: String]()
         
@@ -50,12 +50,12 @@ public class RestRequest {
         if let acceptType = acceptType {
             headers["Accept"] = acceptType
         }
-
+        
         // set the request's content type
         if let contentType = contentType {
             headers["Content-Type"] = contentType
         }
-
+        
         // set the request's header parameters
         if let headerParameters = headerParameters {
             for (key, value) in headerParameters {
@@ -63,7 +63,7 @@ public class RestRequest {
             }
         }
         
-        // verify required url components 
+        // verify required url components
         guard let scheme = urlComponents.scheme else {
             print("Cannot execute request. Please add a scheme to the url (e.g. \"http://\").")
             return
@@ -76,9 +76,9 @@ public class RestRequest {
             print("Cannot execute request. Path could not be determined from the url.")
             return
         }
-
+        
         // construct client request options
-        var options = [ClientRequestOptions]()
+        var options: [ClientRequest.Options] = []
         options.append(.method(method.rawValue))
         options.append(.headers(headers))
         options.append(.schema(scheme + "://"))
@@ -94,7 +94,7 @@ public class RestRequest {
         if let password = password {
             options.append(.password(password))
         }
-
+        
         // construct and execute HTTP request
         let req = HTTP.request(options, callback: callback)
         
@@ -104,9 +104,9 @@ public class RestRequest {
         
         req.end()
     }
-
-    public func responseJSON(callback: Result<JSON, RestError> -> Void) {
-
+    
+    public func responseJSON(callback: (Result<JSON, RestError>) -> Void) {
+        
         self.response { r in
             guard let response = r where response.statusCode == HTTPStatusCode.OK else {
                 let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
@@ -116,7 +116,7 @@ public class RestRequest {
                 callback(.failure(error))
                 return
             }
-
+            
             do {
                 let body = NSMutableData()
                 try response.readAllData(into: body)
@@ -130,7 +130,7 @@ public class RestRequest {
             }
         }
     }
-
+    
     public init(
         method: Method,
         url: String,
