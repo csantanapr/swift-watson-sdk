@@ -16,6 +16,7 @@
 * [IBM Watson Services](#ibm-watson-services)
   - [Alchemy Vision](#alchemy-vision) (partial)
   - [Natural Language Classifier](#natural-language-classifier) (partial)
+  - [Tone Analyzer](#tone-analyzer)
 * [IBM Data and Analytics Services](#ibm-data-and-analytics-services)
   - [Insights For Weather](#insights-for-weather)
 * [Authentication](#authentication)
@@ -107,6 +108,39 @@ e.g.
 
 		// code here
 	})
+```
+
+### Tone Analyzer
+
+The IBM Watson Tone Analyzer service can be used to discover, understand, and revise the language tones in text. The service uses linguistic analysis to detect three types of tones from written text: emotions, social tendencies, and writing style.
+
+Emotions identified include things like anger, fear, joy, sadness, and disgust. Identified social tendencies include things from the Big Five personality traits used by some psychologists. These include openness, conscientiousness, extraversion, agreeableness, and emotional range. Identified writing styles include confident, analytical, and tentative.
+
+##### Links
+The following links provide more information about the IBM Watson Tone Analyzer service:
+
+* [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/watson/developercloud/tone-analyzer.html)
+* [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/watson/developercloud/doc/tone-analyzer/)
+
+##### Usage
+The following example demonstrates how to use the Tone Analyzer service:
+
+```swift
+
+import ToneAnalyzerV3
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let toneAnalyzer = ToneAnalyzer(username: username, password: password, version: version)
+
+let text = "your-input-text"
+let failure = { (error: RestError) in print(error) }
+
+toneAnalyzer.getTone(text, failure: failure) { tones in
+		// code here
+}
+
 ```
 
 
