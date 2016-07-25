@@ -109,9 +109,7 @@ public class RestRequest {
         
         self.response { r in
             guard let response = r where response.statusCode == HTTPStatusCode.OK else {
-                let failureReason = "Response status code was unacceptable: \(r?.statusCode)."
-                //let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                //let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                let failureReason = "Response status code was unacceptable: \(r!.statusCode.rawValue)."
                 let error = RestError.badResponse(failureReason)
                 callback(.failure(error))
                 return
