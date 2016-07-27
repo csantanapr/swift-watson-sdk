@@ -15,9 +15,10 @@
 * [Installation](#installation)
 * [IBM Watson Services](#ibm-watson-services)
   - [Alchemy Vision](#alchemy-vision) (partial)
+  - [Conversation](#conversation)
   - [Natural Language Classifier](#natural-language-classifier) (partial)
-  - [Tone Analyzer](#tone-analyzer)
   - [Personality Insights](#personality-insights)
+  - [Tone Analyzer](#tone-analyzer)  
 * [IBM Data and Analytics Services](#ibm-data-and-analytics-services)
   - [Insights For Weather](#insights-for-weather)
 * [Authentication](#authentication)
@@ -79,6 +80,51 @@ e.g.
 })
 ```
 
+### Conversation
+
+With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
+
+##### Links
+
+* [IBM Watson Conversation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/conversation.html)
+* [IBM Watson Conversation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/conversation/overview.shtml)
+
+##### Usage
+
+The following example shows how to start a conversation with the Conversation service:
+
+```swift
+import Conversation
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let conversation = Conversation(username: username, password: password, version: version)
+
+let workspaceID = "your-workspace-id-here"
+let failure = { (error: RestError) in print(error) }
+var context: Context? // save context to continue conversation
+conversation.message(workspaceID, failure: failure) { response in
+    print(response.output.text)
+    context = response.context
+}
+
+
+The following example shows how to continue an existing conversation with the Conversation service:
+
+```swift
+let text = "Turn on the radio."
+let failure = { (error: RestError) in print(error) }
+conversation.message(workspaceID, text: text, context: context, failure: failure) { response in
+    print(response.output.text)
+    context = response.context
+}
+```
+
+The following links provide more information about the IBM Conversation service:
+
+
+
 ### Natural Language Classifier
 
 The IBM Watson™ Natural Language Classifier service uses machine learning algorithms to return the top matching predefined classes for short text input. You create and train a classifier to connect predefined classes to example texts so that the service can apply those classes to new inputs.
@@ -111,6 +157,35 @@ e.g.
 	})
 ```
 
+### Personality Insights
+
+The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
+
+##### Links
+The following links provide more information about the Personality Insights service:
+
+* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html)
+* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights)
+* [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
+
+##### Usage
+The following example demonstrates how to use the Personality Insights service:
+
+```swift
+import PersonalityInsights
+
+let username = "your-username-here"
+let password = "your-password-here"
+let personalityInsights = PersonalityInsights(username: username, password: password)
+
+let text = "your-input-text"
+let failure = { (error: RestError) in print(error) }
+personalityInsights.getProfile(text: text, failure: failure) { profile in
+		// code here                     
+}
+```
+
+
 ### Tone Analyzer
 
 The IBM Watson Tone Analyzer service can be used to discover, understand, and revise the language tones in text. The service uses linguistic analysis to detect three types of tones from written text: emotions, social tendencies, and writing style.
@@ -128,7 +203,7 @@ The following example demonstrates how to use the Tone Analyzer service:
 
 ```swift
 
-import ToneAnalyzerV3
+import ToneAnalyzer
 
 let username = "your-username-here"
 let password = "your-password-here"
@@ -144,33 +219,6 @@ toneAnalyzer.getTone(text, failure: failure) { tones in
 
 ```
 
-### Personality Insights
-
-The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
-
-##### Links
-The following links provide more information about the Personality Insights service:
-
-* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html)
-* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights)
-* [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
-
-##### Usage
-The following example demonstrates how to use the Personality Insights service:
-
-```swift
-import PersonalityInsightsV2
-
-let username = "your-username-here"
-let password = "your-password-here"
-let personalityInsights = PersonalityInsights(username: username, password: password)
-
-let text = "your-input-text"
-let failure = { (error: RestError) in print(error) }
-personalityInsights.getProfile(text: text, failure: failure) { profile in
-		// code here                     
-}
-```
 
 ## IBM Data and Analytics Services
 
