@@ -18,6 +18,9 @@ import XCTest
 import Conversation
 @testable import RestKit
 
+import Foundation
+import XCTest
+
 class TestConversation: XCTestCase {
     
     private var conversation: Conversation!
