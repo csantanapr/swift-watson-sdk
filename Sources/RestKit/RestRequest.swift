@@ -28,9 +28,9 @@ public class RestRequest {
     private let url: String
     private let acceptType: String?
     private let contentType: String?
-    private let queryParameters: [NSURLQueryItem]?
+    private let queryParameters: [URLQueryItem]?
     private let headerParameters: [String: String]?
-    private let messageBody: NSData?
+    private let messageBody: Data?
     private let username: String?
     private let password: String?
     private let domain = "com.ibm.swift.rest-kit"
@@ -39,7 +39,7 @@ public class RestRequest {
         
         // construct url with query parameters
         let urlComponents = NSURLComponents(string: self.url)!
-        if let queryParameters = queryParameters where !queryParameters.isEmpty {
+        if let queryParameters = queryParameters, !queryParameters.isEmpty {
             urlComponents.queryItems = queryParameters
         }
         
@@ -105,10 +105,10 @@ public class RestRequest {
         req.end()
     }
     
-    public func responseJSON(callback: (Result<JSON, RestError>) -> Void) {
+    public func responseJSON(callback: (Result<JSON>) -> Void) {
         
         self.response { r in
-            guard let response = r where response.statusCode == HTTPStatusCode.OK else {
+            guard let response = r, response.statusCode == HTTPStatusCode.OK else {
                 let failureReason = "Response status code was unacceptable: \(r!.statusCode.rawValue)."
                 let error = RestError.badResponse(failureReason)
                 callback(.failure(error))
@@ -116,9 +116,9 @@ public class RestRequest {
             }
             
             do {
-                let body = NSMutableData()
-                try response.readAllData(into: body)
-                let json = JSON(data: body)
+                var body = Data()
+                try response.readAllData(into: &body)
+                let json = JSON(data: body as Data)
                 callback(.success(json))
             } catch {
                 let failureReason = "Could not parse response data."
@@ -134,9 +134,9 @@ public class RestRequest {
         url: String,
         acceptType: String? = nil,
         contentType: String? = nil,
-        queryParameters: [NSURLQueryItem]? = nil,
+        queryParameters: [URLQueryItem]? = nil,
         headerParameters: [String: String]? = nil,
-        messageBody: NSData? = nil,
+        messageBody: Data? = nil,
         username: String? = nil,
         password: String? = nil)
     {

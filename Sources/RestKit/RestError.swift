@@ -16,7 +16,7 @@
 
 import Foundation
 
-public enum RestError: ErrorProtocol {
+public enum RestError: Error {
     case badResponse(String)
     case badData(String)
     case unknown

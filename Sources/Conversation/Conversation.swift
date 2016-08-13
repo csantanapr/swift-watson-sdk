@@ -72,12 +72,12 @@ public class Conversation {
         workspaceID: WorkspaceID,
         text: String? = nil,
         context: Context? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: MessageResponse -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: (MessageResponse) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(text: text, context: context)
-        guard let body = messageRequest.toJSON().description.data(using: NSUTF8StringEncoding) else {
+        guard let body = messageRequest.toJSON().description.data(using: String.Encoding.utf8) else {
             let failureReason = "Content items could not be serialized to JSON."
             let error = RestError.badData(failureReason)
             failure?(error)
@@ -86,8 +86,8 @@ public class Conversation {
         
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
@@ -96,9 +96,9 @@ public class Conversation {
             acceptType: "application/json",
             contentType: "application/json",
             queryParameters: queryParameters,
+            messageBody: body,
             username: self.username,
-            password: self.password,
-            messageBody: body
+            password: self.password
         )
         
         // execute REST request

@@ -16,7 +16,7 @@
 
 import Foundation
 
-public enum Result<Value, Error: ErrorProtocol> {
+public enum Result<Value> {
     case success(Value)
-    case failure(Error)
+    case failure(RestError)
 }

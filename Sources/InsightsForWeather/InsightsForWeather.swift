@@ -66,14 +66,14 @@ public class InsightsForWeather {
         units: String?,
         geocode: String?,
         language: String,
-        failure: (RestError -> Void)? = nil,
-        success: ForecastDailyResult -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: (ForecastDailyResult) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
-        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
-        queryParameters.append(NSURLQueryItem(name: "language", value: language))
+        var queryParameters = [URLQueryItem]()
+        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units) as URLQueryItem)}
+        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode) as URLQueryItem)}
+        queryParameters.append(NSURLQueryItem(name: "language", value: language) as URLQueryItem)
 
         // construct REST request
         let request = RestRequest(
@@ -117,14 +117,14 @@ public class InsightsForWeather {
         units: String?,
         geocode: String?,
         language: String,
-        failure: (RestError -> Void)? = nil,
-        success: ForecastHourlyResult -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: (ForecastHourlyResult) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
-        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
-        queryParameters.append(NSURLQueryItem(name: "language", value: language))
+        var queryParameters = [URLQueryItem]()
+        if let units = units {queryParameters.append(URLQueryItem(name: "units", value: units))}
+        if let geocode = geocode {queryParameters.append(URLQueryItem(name: "geocode", value: geocode))}
+        queryParameters.append(URLQueryItem(name: "language", value: language))
 
         // construct REST request
         let request = RestRequest(
@@ -170,14 +170,14 @@ public class InsightsForWeather {
         units: String?,
         geocode: String?,
         language: String,
-        failure: (RestError -> Void)? = nil,
-        success: CurrentObservationResult -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: (CurrentObservationResult) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
-        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
-        queryParameters.append(NSURLQueryItem(name: "language", value: language))
+        var queryParameters = [URLQueryItem]()
+        if let units = units {queryParameters.append(URLQueryItem(name: "units", value: units))}
+        if let geocode = geocode {queryParameters.append(URLQueryItem(name: "geocode", value: geocode))}
+        queryParameters.append(URLQueryItem(name: "language", value: language))
 
         // construct REST request
         let request = RestRequest(
@@ -221,14 +221,14 @@ public class InsightsForWeather {
         units: String?,
         geocode: String?,
         language: String,
-        failure: (RestError -> Void)? = nil,
-        success: TimeSeriesResult -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: (TimeSeriesResult) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units))}
-        if let geocode = geocode {queryParameters.append(NSURLQueryItem(name: "geocode", value: geocode))}
-        queryParameters.append(NSURLQueryItem(name: "language", value: language))
+        var queryParameters = [URLQueryItem]()
+        if let units = units {queryParameters.append(URLQueryItem(name: "units", value: units))}
+        if let geocode = geocode {queryParameters.append(URLQueryItem(name: "geocode", value: geocode))}
+        queryParameters.append(URLQueryItem(name: "language", value: language))
 
         // construct REST request
         let request = RestRequest(
