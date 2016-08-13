@@ -89,7 +89,7 @@ public struct ContentItem {
         var map:JSON = [:]
         map["content"].string = content
 
-        if let id = id {
+        if id != nil {
             map["id"].string = self.id!
         }
         if let userID = userID { map["userid"].string = userID }
