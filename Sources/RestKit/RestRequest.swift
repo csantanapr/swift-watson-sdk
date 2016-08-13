@@ -38,7 +38,7 @@ public class RestRequest {
     public func response(callback: ClientRequest.Callback) {
         
         // construct url with query parameters
-        let urlComponents = NSURLComponents(string: self.url)!
+        var urlComponents = URLComponents(string: self.url)!
         if let queryParameters = queryParameters, !queryParameters.isEmpty {
             urlComponents.queryItems = queryParameters
         }
@@ -72,10 +72,8 @@ public class RestRequest {
             print("Cannot execute request. Please add a hostname to the url (e.g. \"www.ibm.com\").")
             return
         }
-        guard let path = urlComponents.percentEncodedPath else {
-            print("Cannot execute request. Path could not be determined from the url.")
-            return
-        }
+        let path = urlComponents.percentEncodedPath
+     
         
         // construct client request options
         var options: [ClientRequest.Options] = []
