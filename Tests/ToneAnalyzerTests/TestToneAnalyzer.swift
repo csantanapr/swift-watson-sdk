@@ -22,7 +22,7 @@ import XCTest
 
 public class TestToneAnalyzer: XCTestCase {
     
-    static var allTests : [(String, TestToneAnalyzer -> () throws -> Void)] {
+    static var allTests : [(String, (TestToneAnalyzer) -> () throws -> Void)] {
         return [
             ("testGetToneWithDefaultParameters", testGetToneWithDefaultParameters),
             ("testGetToneWithCustomParameters", testGetToneWithCustomParameters)
@@ -30,7 +30,7 @@ public class TestToneAnalyzer: XCTestCase {
     }
     
     /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: TimeInterval = 60.0
     
     
     private var username = ""
@@ -47,7 +47,7 @@ public class TestToneAnalyzer: XCTestCase {
         let username = Credentials.ToneAnalyzerUsername
         let password = Credentials.ToneAnalyzerPassword
         
-        let expect = expectation(withDescription: "Test GetToneWithDefaultParameters")
+        let expect = expectation(description: "Test GetToneWithDefaultParameters")
         
         let toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2016-05-10")
         let failure = { (error: RestError) in print(error) }
@@ -106,7 +106,7 @@ public class TestToneAnalyzer: XCTestCase {
         }
 
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
     
     /** Analyze the tone of the given text with custom parameters. */
@@ -115,7 +115,7 @@ public class TestToneAnalyzer: XCTestCase {
         let username = Credentials.ToneAnalyzerUsername
         let password = Credentials.ToneAnalyzerPassword
         
-        let expect = expectation(withDescription: "Test GetToneWithDefaultParameters")
+        let expect = expectation(description: "Test GetToneWithDefaultParameters")
         
         let toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2016-05-10")
         let failure = { (error: RestError) in print(error) }
@@ -144,6 +144,6 @@ public class TestToneAnalyzer: XCTestCase {
             
             expect.fulfill()
         }
-         waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+         waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
 }

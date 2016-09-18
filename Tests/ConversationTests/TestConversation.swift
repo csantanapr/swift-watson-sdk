@@ -25,10 +25,10 @@ class TestConversation: XCTestCase {
     
     private var conversation: Conversation!
     private let workspaceID = "8d869397-411b-4f0a-864d-a2ba419bb249"
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: TimeInterval = 60.0
 
     
-    static var allTests : [(String, TestConversation -> () throws -> Void)] {
+    static var allTests : [(String, (TestConversation) -> () throws -> Void)] {
         return [
             ("testMessage", testMessage),
             ("testMessageInvalidWorkspace", testMessageInvalidWorkspace),
@@ -46,15 +46,15 @@ class TestConversation: XCTestCase {
 
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectations(withTimeout: timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
     
     /** Fail false negatives. */
-    func failWithError(error: RestError) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
+//    public func failWithError(error: RestError) {
+//        XCTFail("Positive test failed with error: \(error)")
+//    }
 
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
@@ -70,10 +70,14 @@ class TestConversation: XCTestCase {
         conversation = Conversation(username: Credentials.ConversationUsername, password: Credentials.ConversationPassword, version: "2016-07-19")
         
         let description1 = "Start a conversation."
-        let expectation1 = expectation(withDescription: description1)
+        let expectation1 = expectation(description: description1)
         
         let response1 = ["Hi. It looks like a nice drive today. What would you like me to do?"]
         let nodes1 = ["node_1_1467221909631"]
+        
+        let failWithError = { (error: RestError) in
+            XCTFail("Positive test failed with error: \(error)")
+        }
         
         var context: Context?
         conversation.message(workspaceID: workspaceID, failure: failWithError) { response in
@@ -105,7 +109,7 @@ class TestConversation: XCTestCase {
         waitForExpectations()
         
         let description2 = "Continue a conversation."
-        let expectation2 = expectation(withDescription: description2)
+        let expectation2 = expectation(description: description2)
         
         let text = "Turn on the radio."
         let response2 = ["", "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."]
@@ -151,7 +155,7 @@ class TestConversation: XCTestCase {
 
     func testMessageInvalidWorkspace() {
         let description = "Start a conversation with an invalid workspace."
-        let expectation1 = expectation(withDescription: description)
+        let expectation1 = expectation(description: description)
         
         conversation = Conversation(username: Credentials.ConversationUsername, password: Credentials.ConversationPassword, version: "2016-07-19")
         
@@ -168,12 +172,16 @@ class TestConversation: XCTestCase {
     
     func testMessageInvalidConversationID() {
         let description = "Continue a conversation with an invalid conversation id."
-        let expectation1 = expectation(withDescription: description)
+        let expectation1 = expectation(description: description)
         
         conversation = Conversation(username: Credentials.ConversationUsername, password: Credentials.ConversationPassword, version: "2016-07-19")
         
         let text = "Turn on the radio."
         let context = Context(conversationID: "this-id-is-invalid")
+        
+        let failWithError = { (error: RestError) in
+            XCTFail("Positive test failed with error: \(error)")
+        }
         
         conversation.message(workspaceID: workspaceID, text: text, context: context, failure: failWithError) {
             response in
