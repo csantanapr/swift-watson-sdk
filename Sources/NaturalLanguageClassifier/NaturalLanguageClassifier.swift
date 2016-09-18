@@ -59,16 +59,16 @@ public class NaturalLanguageClassifier {
        The array is empty if no classifiers are available.
      */
     public func getClassifiers(
-        failure: (RestError -> Void)? = nil,
-        success: [ClassifierModel] -> Void) {
+        failure: ((RestError) -> Void)? = nil,
+        success: ([ClassifierModel]) -> Void) {
         
         // construct REST request
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/classifiers",
+            acceptType: "application/json",
             username: username,
-            password: password,
-            acceptType: "application/json"
+            password: password
         )
         
         // execute REST request
@@ -95,14 +95,14 @@ public class NaturalLanguageClassifier {
     public func classify(
         classifierId: String,
         text: String,
-        failure: (RestError -> Void)? = nil,
-        success: Classification -> Void) {
+        failure: ((RestError) -> Void)? = nil,
+        success: (Classification) -> Void) {
         
 
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "classifier_id", value: classifierId))
-        queryParameters.append(NSURLQueryItem(name: "text", value: text))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "classifier_id", value: classifierId))
+        queryParameters.append(URLQueryItem(name: "text", value: text))
         
         // construct REST request
         let request = RestRequest(
@@ -110,9 +110,9 @@ public class NaturalLanguageClassifier {
             url: serviceURL + "/v1/classifiers/\(classifierId)/classify",
             acceptType: "application/json",
             contentType: "application/json",
+            queryParameters: queryParameters,
             username: username,
-            password: password,
-            queryParameters: queryParameters
+            password: password
         )
         
         // execute REST request
@@ -133,8 +133,8 @@ public class NaturalLanguageClassifier {
      */
     public func deleteClassifier(
         classifierId: String,
-        failure: (RestError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
+        failure: ((RestError) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(
@@ -163,8 +163,8 @@ public class NaturalLanguageClassifier {
      */
     public func getClassifier(
         classifierId: String,
-        failure: (RestError -> Void)? = nil,
-        success: ClassifierDetails -> Void) {
+        failure: ((RestError) -> Void)? = nil,
+        success: (ClassifierDetails) -> Void) {
         
         // construct REST request
         let request = RestRequest(
