@@ -78,12 +78,12 @@ public class WeatherCompanyData {
         longitude: String,
         language: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (ForecastDailyResult) -> Void)
+        success: @escaping (ForecastDailyResult) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        if let units = units {queryParameters.append(NSURLQueryItem(name: "units", value: units) as URLQueryItem)}
-        queryParameters.append(NSURLQueryItem(name: "language", value: language) as URLQueryItem)
+        if let units = units {queryParameters.append(URLQueryItem(name: "units", value: units))}
+        queryParameters.append(URLQueryItem(name: "language", value: language))
         
         // construct REST request
         let request = RestRequest(
@@ -130,7 +130,7 @@ public class WeatherCompanyData {
         longitude: String,
         language: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (ForecastHourlyResult) -> Void)
+        success: @escaping (ForecastHourlyResult) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -183,7 +183,7 @@ public class WeatherCompanyData {
         longitude: String,
         language: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (CurrentObservationResult) -> Void)
+        success: @escaping (CurrentObservationResult) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -234,7 +234,7 @@ public class WeatherCompanyData {
         longitude: String,
         language: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (TimeSeriesResult) -> Void)
+        success: @escaping (TimeSeriesResult) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()

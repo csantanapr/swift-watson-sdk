@@ -60,7 +60,7 @@ public class NaturalLanguageClassifier {
      */
     public func getClassifiers(
         failure: ((RestError) -> Void)? = nil,
-        success: ([ClassifierModel]) -> Void) {
+        success: @escaping ([ClassifierModel]) -> Void) {
         
         // construct REST request
         let request = RestRequest(
@@ -96,7 +96,7 @@ public class NaturalLanguageClassifier {
         classifierId: String,
         text: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (Classification) -> Void) {
+        success: @escaping (Classification) -> Void) {
         
 
         // construct query parameters
@@ -164,7 +164,7 @@ public class NaturalLanguageClassifier {
     public func getClassifier(
         classifierId: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (ClassifierDetails) -> Void) {
+        success: @escaping (ClassifierDetails) -> Void) {
         
         // construct REST request
         let request = RestRequest(

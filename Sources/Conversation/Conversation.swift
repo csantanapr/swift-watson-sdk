@@ -73,7 +73,7 @@ public class Conversation {
         text: String? = nil,
         context: Context? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (MessageResponse) -> Void)
+        success: @escaping (MessageResponse) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(text: text, context: context)

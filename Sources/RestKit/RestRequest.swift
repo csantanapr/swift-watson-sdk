@@ -35,7 +35,7 @@ public class RestRequest {
     private let password: String?
     private let domain = "com.ibm.swift.rest-kit"
     
-    public func response(callback: ClientRequest.Callback) {
+    public func response(callback: @escaping ClientRequest.Callback) {
         
         // construct url with query parameters
         var urlComponents = URLComponents(string: self.url)!
@@ -103,7 +103,7 @@ public class RestRequest {
         req.end()
     }
     
-    public func responseJSON(callback: (Result<JSON>) -> Void) {
+    public func responseJSON(callback: @escaping (Result<JSON>) -> Void) {
         
         self.response { r in
             guard let response = r, response.statusCode == HTTPStatusCode.OK else {

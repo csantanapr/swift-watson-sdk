@@ -74,7 +74,7 @@ public class ToneAnalyzer {
         tones: [String]? = nil,
         sentences: Bool? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (ToneAnalysis) -> Void) {
+        success: @escaping (ToneAnalysis) -> Void) {
         
         let body = "{\"text\": \"\(text)\"}".data(using: String.Encoding.utf8)
         

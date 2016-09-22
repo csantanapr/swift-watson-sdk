@@ -54,7 +54,7 @@ public class AlchemyVision {
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (ImageKeywords) -> Void)
+        success: @escaping (ImageKeywords) -> Void)
     {
         // construct query parameters
 
@@ -108,7 +108,7 @@ public class AlchemyVision {
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (FaceTags) -> Void)
+        success: @escaping (FaceTags) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -161,7 +161,7 @@ public class AlchemyVision {
     public func getImage(
         url: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (ImageLink) -> Void)
+        success: @escaping (ImageLink) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -196,7 +196,7 @@ public class AlchemyVision {
     public func getRankedImageSceneText(
         url: String,
         failure: ((RestError) -> Void)? = nil,
-        success: (SceneText) -> Void)
+        success: @escaping (SceneText) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()

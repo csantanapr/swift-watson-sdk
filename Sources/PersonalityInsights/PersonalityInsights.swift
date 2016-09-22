@@ -67,7 +67,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (Profile) -> Void)
+        success: @escaping (Profile) -> Void)
     {
         guard let content = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
@@ -106,7 +106,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (Profile) -> Void)
+        success: @escaping (Profile) -> Void)
     {
         guard let content = html.data(using: String.Encoding.utf8) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
@@ -142,7 +142,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (Profile) -> Void)
+        success: @escaping (Profile) -> Void)
     {
         var aggregateItems = ""
         for count in 0...contentItems.count-1 {
@@ -195,7 +195,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((RestError) -> Void)? = nil,
-        success: (Profile) -> Void)
+        success: @escaping (Profile) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
