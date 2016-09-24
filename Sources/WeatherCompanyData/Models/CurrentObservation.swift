@@ -189,6 +189,6 @@ public struct CurrentObservation {
             unit = "uk_hybrid"
         }
         
-        measurement = Measurement(json: json[unit])
+        measurement = Measurement(json: json)
     }
 }

@@ -47,7 +47,7 @@ public class ToneAnalyzer {
         username: String,
         password: String,
         version: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/tone-analyzer-beta/api")
+        serviceURL: String = "https://gateway.watsonplatform.net/tone-analyzer/api")
     {
         self.username = username
         self.password = password
@@ -73,20 +73,20 @@ public class ToneAnalyzer {
         text: String,
         tones: [String]? = nil,
         sentences: Bool? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: ToneAnalysis -> Void) {
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void) {
         
-        let body = "{\"text\": \"\(text)\"}".data(using: NSStringEncoding.init())
+        let body = "{\"text\": \"\(text)\"}".data(using: String.Encoding.utf8)
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         if let tones = tones {
             let tonesList = tones.joined(separator: ",")
-            queryParameters.append(NSURLQueryItem(name: "tones", value: tonesList))
+            queryParameters.append(URLQueryItem(name: "tones", value: tonesList))
         }
         if let sentences = sentences {
-            queryParameters.append(NSURLQueryItem(name: "sentences", value: "\(sentences)"))
+            queryParameters.append(URLQueryItem(name: "sentences", value: "\(sentences)"))
         }
         
         // construct REST request
@@ -95,10 +95,10 @@ public class ToneAnalyzer {
             url: serviceURL + "/v3/tone",
             acceptType: "application/json",
             contentType: "application/json",
-            username: self.username,
-            password: self.password,
             queryParameters: queryParameters,
-            messageBody: body
+            messageBody: body,
+            username: self.username,
+            password: self.password
         )
         
         // execute REST request

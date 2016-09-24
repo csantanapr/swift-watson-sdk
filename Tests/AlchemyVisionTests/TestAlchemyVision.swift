@@ -22,7 +22,7 @@ import XCTest
 
 public class TestAlchemyVision: XCTestCase {
 
-    static var allTests : [(String, TestAlchemyVision -> () throws -> Void)] {
+    static var allTests : [(String, (TestAlchemyVision) -> () throws -> Void)] {
 		return [
             ("testGetRankedImageKeywords", testGetRankedImageKeywords),
             ("testURLRecognizeFaces", testURLRecognizeFaces),
@@ -32,7 +32,7 @@ public class TestAlchemyVision: XCTestCase {
 	}
 
     /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: TimeInterval = 60.0
     
     private var apiKey = ""
 
@@ -40,7 +40,7 @@ public class TestAlchemyVision: XCTestCase {
 
         let apiKey = Credentials.alchemyAPI
 
-        let expect = expectation(withDescription: "Test GetRankedImageKeywords")
+        let expect = expectation(description: "Test GetRankedImageKeywords")
         
         let alchemyVision = AlchemyVision(apiKey: apiKey)
         let failure = { (error: RestError) in print(error) }
@@ -52,13 +52,13 @@ public class TestAlchemyVision: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
     
     func testURLRecognizeFaces(){
         
         let apiKey = Credentials.alchemyAPI
-        let emptyExpectation = expectation(withDescription: "Empty")
+        let emptyExpectation = expectation(description: "Empty")
     //    let validExpectation = expectation(withDescription: "Valid")
         
         let alchemyVision = AlchemyVision(apiKey: apiKey)
@@ -73,14 +73,14 @@ public class TestAlchemyVision: XCTestCase {
             emptyExpectation.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
     
     func testGetRankedImageSceneText(){
         
         let apiKey = Credentials.alchemyAPI
         
-        let expect = expectation(withDescription: "Test GetRankedImageKeywords")
+        let expect = expectation(description: "Test GetRankedImageKeywords")
         
         let alchemyVision = AlchemyVision(apiKey: apiKey)
         let failure = { (error: RestError) in print(error) }
@@ -92,14 +92,14 @@ public class TestAlchemyVision: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
     
     func testGetImage(){
         
         let apiKey = Credentials.alchemyAPI
         
-        let expect = expectation(withDescription: "Test GetRankedImageKeywords")
+        let expect = expectation(description: "Test GetRankedImageKeywords")
         
         let alchemyVision = AlchemyVision(apiKey: apiKey)
         let failure = { (error: RestError) in print(error) }
@@ -112,6 +112,6 @@ public class TestAlchemyVision: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
 }

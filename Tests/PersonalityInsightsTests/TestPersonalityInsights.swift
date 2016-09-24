@@ -22,7 +22,7 @@ import Foundation
 
 class TestPersonalityInsights: XCTestCase {
 
-    static var allTests : [(String, TestPersonalityInsights -> () throws -> Void)] {
+    static var allTests : [(String, (TestPersonalityInsights) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
@@ -31,7 +31,7 @@ class TestPersonalityInsights: XCTestCase {
     }
     
     /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: TimeInterval = 60.0
     
     
     private var username = ""
@@ -59,7 +59,7 @@ class TestPersonalityInsights: XCTestCase {
 
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectations(withTimeout: timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -72,7 +72,7 @@ class TestPersonalityInsights: XCTestCase {
         let username = Credentials.PersonalityInsightsUsername
         let password = Credentials.PersonalityInsightsPassword
         
-        let expect = expectation(withDescription: "Test Profile")
+        let expect = expectation(description: "Test Profile")
         
         let personalityInsights = PersonalityInsights(username: username, password: password)
         let failure = { (error: RestError) in print(error) }
@@ -90,7 +90,7 @@ class TestPersonalityInsights: XCTestCase {
         let username = Credentials.PersonalityInsightsUsername
         let password = Credentials.PersonalityInsightsPassword
         
-        let expect = expectation(withDescription: "Test ContentItem")
+        let expect = expectation(description: "Test ContentItem")
         
         let personalityInsights = PersonalityInsights(username: username, password: password)
         let failure = { (error: RestError) in print(error) }
@@ -125,7 +125,7 @@ class TestPersonalityInsights: XCTestCase {
         let username = Credentials.PersonalityInsightsUsername
         let password = Credentials.PersonalityInsightsPassword
         
-        let expect = expectation(withDescription: "Test ContentItem")
+        let expect = expectation(description: "Test ContentItem")
     
         let personalityInsights = PersonalityInsights(username: username, password: password)
 

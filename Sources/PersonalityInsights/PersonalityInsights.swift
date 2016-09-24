@@ -62,14 +62,14 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        text text: String,
+        text: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
-        guard let content = text.data(using: NSUTF8StringEncoding) else {
+        guard let content = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
             let error = RestError.badData(failureReason)
             failure?(error)
@@ -101,14 +101,14 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        html html: String,
+        html: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
-        guard let content = html.data(using: NSUTF8StringEncoding) else {
+        guard let content = html.data(using: String.Encoding.utf8) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
             let error = RestError.badData(failureReason)
             failure?(error)
@@ -137,12 +137,12 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        contentItems contentItems: [ContentItem],
+        contentItems: [ContentItem],
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
         var aggregateItems = ""
         for count in 0...contentItems.count-1 {
@@ -152,11 +152,11 @@ public class PersonalityInsights {
             }
         }
         
-        var completeItems = "{\"contentItems\": [\(aggregateItems)]}"
+        let completeItems = "{\"contentItems\": [\(aggregateItems)]}"
     //    completeItems = completeItems.replacingOccurrences(of: "\n", with: "")
     //    completeItems = completeItems.replacingOccurrences(of: "\\", with: "")
  
-        guard let content = completeItems.data(using: NSUTF8StringEncoding) else {
+        guard let content = completeItems.data(using: String.Encoding.utf8) else {
             let failureReason = "Content items could not be serialized to JSON."
             let error = RestError.badData(failureReason)
             failure?(error)
@@ -189,18 +189,18 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     private func getProfile(
-        content: NSData?,
+        content: Data?,
         contentType: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let includeRaw = includeRaw {
-            let queryParameter = NSURLQueryItem(name: "include_raw", value: "\(includeRaw)")
+            let queryParameter = URLQueryItem(name: "include_raw", value: "\(includeRaw)")
             queryParameters.append(queryParameter)
         }
 
@@ -220,10 +220,10 @@ public class PersonalityInsights {
             acceptType: "application/json",
             contentType: contentType,
             queryParameters: queryParameters,
-            username: self.username,
-            password: self.password,
             headerParameters: headerParameters,
-            messageBody: content
+            messageBody: content,
+            username: self.username,
+            password: self.password
         )
 
         // execute REST request

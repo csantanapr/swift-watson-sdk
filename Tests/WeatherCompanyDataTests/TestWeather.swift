@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-@testable import InsightsForWeather
+@testable import WeatherCompanyData
 @testable import RestKit
 
 import Foundation
@@ -22,7 +22,7 @@ import XCTest
 
 public class TestWeather: XCTestCase {
 
-    static var allTests : [(String, TestWeather -> () throws -> Void)] {
+    static var allTests : [(String, (TestWeather) -> () throws -> Void)] {
 		return [
             ("testGet10DayForecast", testGet10DayForecast),
             ("testGet24HourForecast", testGet24HourForecast),
@@ -32,9 +32,7 @@ public class TestWeather: XCTestCase {
 	}
 
     /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
-    
-    private let ibmAustinGeocode = "30.401633699999998,-97.7143924"
+    private let timeout: TimeInterval = 60.0
     
     private var username = ""
     private var password = ""
@@ -44,14 +42,15 @@ public class TestWeather: XCTestCase {
         let username = Credentials.weatherUsername
         let password = Credentials.weatherPassword
     
-        let expect = expectation(withDescription: "Test Get10DayForecast")
+        let expect = expectation(description: "Test Get10DayForecast")
         
-        let insightsForWeather = InsightsForWeather(username: username, password: password)
+        let weatherCompanyData = WeatherCompanyData(username: username, password: password)
         let failure = { (error: RestError) in print(error) }
         
-        insightsForWeather.get10DayForecast(
+        weatherCompanyData.get10DayForecast(
             units: "e",
-            geocode: ibmAustinGeocode,
+            latitude: "30.402",
+            longitude: "-97.71",
             language: "en-US",
             failure: failure)
         {
@@ -60,7 +59,7 @@ public class TestWeather: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
 
     func testGet24HourForecast() {
@@ -68,14 +67,15 @@ public class TestWeather: XCTestCase {
         let username = Credentials.weatherUsername
         let password = Credentials.weatherPassword
 
-        let expect = expectation(withDescription: "Test Get24HourForecast")
+        let expect = expectation(description: "Test Get24HourForecast")
         
-        let insightsForWeather = InsightsForWeather(username: username, password: password)
+        let weatherCompanyData = WeatherCompanyData(username: username, password: password)
         let failure = { (error: RestError) in print(error) }
         
-        insightsForWeather.get24HourForecast(
+        weatherCompanyData.get48HourForecast(
             units: "e",
-            geocode: ibmAustinGeocode,
+            latitude: "30.402",
+            longitude: "-97.71",
             language: "en-US",
             failure: failure)
         {
@@ -84,7 +84,7 @@ public class TestWeather: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
 
     func testGetCurrentForecast() {
@@ -92,14 +92,15 @@ public class TestWeather: XCTestCase {
         let username = Credentials.weatherUsername
         let password = Credentials.weatherPassword
 
-        let expect = expectation(withDescription: "Test GetCurrentWeather")
+        let expect = expectation(description: "Test GetCurrentWeather")
         
-        let insightsForWeather = InsightsForWeather(username: username, password: password)
+        let weatherCompanyData = WeatherCompanyData(username: username, password: password)
         let failure = { (error: RestError) in print(error) }
         
-        insightsForWeather.getCurrentForecast(
+        weatherCompanyData.getCurrentForecast(
             units: "e",
-            geocode: ibmAustinGeocode,
+            latitude: "30.402",
+            longitude: "-97.71",
             language: "en-US",
             failure: failure)
         {
@@ -108,22 +109,23 @@ public class TestWeather: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
 
     func testGetTimeSeries() {
 
-	let username = Credentials.weatherUsername
+        let username = Credentials.weatherUsername
         let password = Credentials.weatherPassword
 
-        let expect = expectation(withDescription: "Test GetCurrentWeather")
+        let expect = expectation(description: "Test GetCurrentWeather")
         
-        let insightsForWeather = InsightsForWeather(username: username, password: password)
+        let weatherCompanyData = WeatherCompanyData(username: username, password: password)
         let failure = { (error: RestError) in print(error) }
         
-        insightsForWeather.getTimeSeries(
+        weatherCompanyData.getTimeSeries(
             units: "e",
-            geocode: ibmAustinGeocode,
+            latitude: "30.402",
+            longitude: "-97.71",
             language: "en-US",
             failure: failure)
         {
@@ -132,6 +134,6 @@ public class TestWeather: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations( withTimeout: timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
 }

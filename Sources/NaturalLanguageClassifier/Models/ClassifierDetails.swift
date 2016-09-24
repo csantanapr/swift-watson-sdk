@@ -71,7 +71,7 @@ public enum ClassifierStatus: String {
     case Unavailable = "Unavailable"
 }
 
-public enum ClassifierError: ErrorProtocol {
+public enum ClassifierError: Error{
     case invalidStatus(String)
     case unknown
 }

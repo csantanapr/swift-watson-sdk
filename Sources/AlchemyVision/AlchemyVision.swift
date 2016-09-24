@@ -53,27 +53,27 @@ public class AlchemyVision {
         url: String,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: ImageKeywords -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (ImageKeywords) -> Void)
     {
         // construct query parameters
 
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParameters.append(URLQueryItem(name: "url", value: url))
         if let forceShowAll = forceShowAll {
             if forceShowAll {
-                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "1"))
+                queryParameters.append(URLQueryItem(name: "forceShowAll", value: "1"))
             } else {
-                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "0"))
+                queryParameters.append(URLQueryItem(name: "forceShowAll", value: "0"))
             }
         }
         if let knowledgeGraph = knowledgeGraph {
             if knowledgeGraph {
-                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "1"))
+                queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "1"))
             } else {
-                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "0"))
+                queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "0"))
             }
         }
 
@@ -107,27 +107,27 @@ public class AlchemyVision {
         url: String,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
-        failure: (RestError -> Void)? = nil,
-        success: FaceTags -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (FaceTags) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
-        queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "url", value: url))
+        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         
         if let forceShowAll = forceShowAll {
             if forceShowAll {
-                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "1"))
+                queryParameters.append(URLQueryItem(name: "forceShowAll", value: "1"))
             } else {
-                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "0"))
+                queryParameters.append(URLQueryItem(name: "forceShowAll", value: "0"))
             }
         }
         if let knowledgeGraph = knowledgeGraph {
             if knowledgeGraph {
-                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "1"))
+                queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "1"))
             } else {
-                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "0"))
+                queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "0"))
             }
         }
         
@@ -160,14 +160,14 @@ public class AlchemyVision {
      */
     public func getImage(
         url: String,
-        failure: (RestError -> Void)? = nil,
-        success: ImageLink -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (ImageLink) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
-        queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "url", value: url))
+        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         
         // construct REST request
         let request = RestRequest(
@@ -195,14 +195,14 @@ public class AlchemyVision {
      */
     public func getRankedImageSceneText(
         url: String,
-        failure: (RestError -> Void)? = nil,
-        success: SceneText -> Void)
+        failure: ((RestError) -> Void)? = nil,
+        success: @escaping (SceneText) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
-        queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "url", value: url))
+        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         
         // construct REST request
         let request = RestRequest(
