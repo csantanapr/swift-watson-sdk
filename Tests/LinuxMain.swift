@@ -1,7 +1,7 @@
 import XCTest
 
-@testable import TestWeather
+@testable import WeatherCompanyDataTests
 
 XCTMain([
-	testCase(TestWeather.allTests)
+	testCase(WeatherCompanyDataTests.allTests)
 ])
