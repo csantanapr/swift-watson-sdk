@@ -20,9 +20,9 @@
 import Foundation
 import XCTest
 
-public class TestWeather: XCTestCase {
+public class WeatherCompanyDataTests: XCTestCase {
 
-    static var allTests : [(String, (TestWeather) -> () throws -> Void)] {
+    static var allTests : [(String, (WeatherCompanyDataTests) -> () throws -> Void)] {
 		return [
             ("testGet10DayForecast", testGet10DayForecast),
             ("testGet24HourForecast", testGet24HourForecast),
