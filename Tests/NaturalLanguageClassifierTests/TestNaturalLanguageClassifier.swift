@@ -24,8 +24,8 @@ public class TestNaturalLanguageClassifier: XCTestCase {
 
     static var allTests : [(String, (TestNaturalLanguageClassifier) -> () throws -> Void)] {
 		return [
-            ("testGetClassifiers", testGetClassifiers),
-            ("testGetClassify", testGetClassify)
+            ("testGetClassifiers", testGetClassifiers)
+            //("testGetClassify", testGetClassify)
 	    ]
 	}
 

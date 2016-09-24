@@ -162,7 +162,7 @@ class TestConversation: XCTestCase {
         let workspaceID = "this-id-is-invalid"
         
         let failure = { (error: RestError) in
-            XCTAssertTrue(String(error).contains("400"))
+            XCTAssertTrue(String(describing: error).contains("400"))
             expectation1.fulfill()
         }
         
