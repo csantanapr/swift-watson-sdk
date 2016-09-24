@@ -12,7 +12,7 @@ let package = Package(
         Target(name: "AlchemyVision", dependencies: [.Target(name: "RestKit")])
     ],
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/Kitura-net.git", majorVersion: 0, minor: 32),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-net.git", majorVersion: 1, minor: 0),
         .Package(url: "https://github.com/IBM-Swift/SwiftyJSON.git", majorVersion: 14)
     ]
 )
