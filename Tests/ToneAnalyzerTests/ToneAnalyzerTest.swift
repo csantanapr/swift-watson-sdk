@@ -20,9 +20,9 @@
 import Foundation
 import XCTest
 
-public class TestToneAnalyzer: XCTestCase {
+public class ToneAnalyzerTest: XCTestCase {
     
-    static var allTests : [(String, (TestToneAnalyzer) -> () throws -> Void)] {
+    static var allTests : [(String, (ToneAnalyzerTest) -> () throws -> Void)] {
         return [
             ("testGetToneWithDefaultParameters", testGetToneWithDefaultParameters),
             ("testGetToneWithCustomParameters", testGetToneWithCustomParameters)
