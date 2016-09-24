@@ -130,7 +130,7 @@ class TestPersonalityInsights: XCTestCase {
         let personalityInsights = PersonalityInsights(username: username, password: password)
 
         let failure = { (error: RestError) in
-            XCTAssertTrue(String(error).contains("400"))
+            XCTAssertTrue(String(describing: error).contains("400"))
             expect.fulfill()
         }
 
