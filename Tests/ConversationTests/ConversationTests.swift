@@ -21,14 +21,14 @@ import Conversation
 import Foundation
 import XCTest
 
-class TestConversation: XCTestCase {
+class ConversationTests: XCTestCase {
     
     private var conversation: Conversation!
     private let workspaceID = "8d869397-411b-4f0a-864d-a2ba419bb249"
     private let timeout: TimeInterval = 60.0
 
     
-    static var allTests : [(String, (TestConversation) -> () throws -> Void)] {
+    static var allTests : [(String, (ConversationTests) -> () throws -> Void)] {
         return [
             ("testMessage", testMessage),
             ("testMessageInvalidWorkspace", testMessageInvalidWorkspace),

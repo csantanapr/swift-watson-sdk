@@ -20,9 +20,9 @@
 import Foundation
 import XCTest
 
-public class TestAlchemyVision: XCTestCase {
+public class AlchemyVisionTests: XCTestCase {
 
-    static var allTests : [(String, (TestAlchemyVision) -> () throws -> Void)] {
+    static var allTests : [(String, (AlchemyVisionTests) -> () throws -> Void)] {
 		return [
             ("testGetRankedImageKeywords", testGetRankedImageKeywords),
             ("testURLRecognizeFaces", testURLRecognizeFaces),
