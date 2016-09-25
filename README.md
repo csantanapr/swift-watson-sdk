@@ -7,7 +7,7 @@
 ![Apache 2](https://img.shields.io/badge/license-Apache2-blue.svg?style=flat)
 
 
-> The Watson Developer Cloud Swift SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services and Analytics Insights for Weather to their Swift 3 applications.
+> The Watson Developer Cloud Swift SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services and Analytics Weather Company Data to their Swift 3 applications.
 
 > *The Watson Developer Cloud Swift SDK is currently in beta.*
 
@@ -20,7 +20,7 @@
   - [Personality Insights](#personality-insights)
   - [Tone Analyzer](#tone-analyzer)  
 * [IBM Data and Analytics Services](#ibm-data-and-analytics-services)
-  - [Insights For Weather](#insights-for-weather)
+  - [Weather Company Data](#weather-company-data) (partial)
 * [Authentication](#authentication)
 * [Building and Testing](#build--test)
 * [Open Source @ IBM](#open-source--ibm)
@@ -224,36 +224,41 @@ toneAnalyzer.getTone(text, failure: failure) { tones in
 
 **Getting started with IBM Data and Analytics Services and Bluemix**
 
-Use IBM® Insights for Weather to incorporate weather data from The Weather Company (TWC) into your IBM® Bluemix® applications.
+Use Weather Company Data for IBM® Bluemix® to incorporate weather data from The Weather Company (TWC) into your IBM® Bluemix® applications.
 
 IBM Bluemix™ is the cloud platform in which you deploy applications that you develop with Watson Developer Cloud services. The Watson Developer Cloud documentation provides information for developing applications with Watson services in Bluemix. You can learn more about Bluemix from the following links:
 
 The IBM Bluemix documentation, specifically the pages [What is Bluemix](https://www.ng.bluemix.net/docs/)? and the [Bluemix overview](https://www.ng.bluemix.net/docs/overview/index.html).
 IBM developerWorks, specifically the [IBM Bluemix section of IBM developerWorks](https://www.ibm.com/developerworks/cloud/bluemix/) and the article that provides [An introduction to the application lifecycle on IBM Bluemix](http://www.ibm.com/developerworks/cloud/library/cl-intro-codename-bluemix-video/index.html?ca=dat).
  
-#### Insights for Weather
+#### Weather Company Data 
 
-This service lets you integrate historical and real-time weather data from The Weather Company into your IBM Bluemix application. You can retrieve weather data for an area specified by a geolocation. The data allows you to forecast, detect, and visualize disruptive weather events that might affect decision making in your application.
+Use Weather Company Data for IBM® Bluemix® to incorporate weather data from The Weather Company (TWC) into your IBM® Bluemix® applications.
 
-You can add weather observations and forecasts to your Bluemix application and display the weather data for an area that is specified by a geolocation by using the Insights for Weather REST APIs. The Weather Company is the most comprehensive provider of historical and forecast weather data. Data for all forms of weather, including precipitation, barometric pressure, wind, and thunderstorms, is captured.
+You can add weather observations and forecasts to your Bluemix application and display the weather data for an area that is specified by a geolocation by using the REST APIs. The Weather Company is the most comprehensive provider of historical and forecast weather data. Data for all forms of weather, including precipitation, barometric pressure, wind, and thunderstorms, is captured.
 
-You can use the REST APIs to retrieve the following information:
+You can use the [REST APIs](https://twcservice.mybluemix.net/rest-api/) to retrieve the following information:
 
-An hourly weather forecast for the next 24 hours that starts from the current time for a specified geolocation.
-A daily weather forecast for the next 10 days that includes forecasts for the daytime and nighttime segments for a specified geolocation. This forecast includes the forecast narrative text string of up to 256 characters with appropriate units of measure for the location and in the language requested.
-The current observed weather data for a specified geolocation. This weather data includes temperature, precipitation, wind direction and speed, humidity, barometric pressure, dew point, visibility, and ultraviolet (UV) radiation.
-The observed weather data for a specified geolocation and a specified time range. This data is sourced from physical observation stations. This API returns weather observations for current conditions and past observations up to and including the previous 24 hours.
+* An hourly weather forecast for the next 48 hours that starts from the current time for a specified geolocation.
+* A daily forecast for each of the next 3, 5, 7, or 10 days starting from the current day that includes forecasts for the daytime and nighttime segments for a specified geolocation. This forecast includes the forecast narrative text string of up to 256 characters with appropriate units of measure for the location and in the language requested.
+* A daily forecast for each of the next 3, 5, 7, or 10 days starting from the current day, which breaks each daily forecast into morning, afternoon, evening, and overnight segments.
+* The current observed weather data for a specified geolocation. This weather data includes temperature, precipitation, wind direction and speed, humidity, barometric pressure, dew point, visibility, and ultraviolet (UV) radiation.
+* The observed weather data for a specified geolocation up to and including the previous 24 hours. This data is sourced from physical observation stations.
+* Government-issued weather alerts, including weather watches, warnings, statements, and advisories issued by the National Weather Service (US), Environment Canada, and MeteoAlarm (Europe).
+* Almanac services that provide historical daily or monthly weather data that is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more.
+* Location mapping services that provide the ability to look up a location name or geocode (latitude and longitude) to retrieve a set of locations that match your request.
 
 ##### Links
-* Insights for Weather API docs [here](https://console.ng.bluemix.net/docs/services/Weather/index.html)
-* Try out the [demo](http://insights-for-weather-demo.mybluemix.net/)
+* Weather Company Data API docs [here](https://console.ng.bluemix.net/docs/services/Weather/index.html)
+* Try out the [demo](http://weather-company-data-demo.mybluemix.net/)
 
 ##### Usage
 Instantiate an **Insights for Weather** service:
 
 ```swift
 
-let insightsForWeatherInstance = InsightsForWeather(username: username, password: password)
+let weatherCompanyData = WeatherCompanyData(username: username, password: password)
+
 
 ```
 
@@ -264,26 +269,26 @@ e.g.
 ```swift
         let failure = { (error: RestError) in print(error) }
         
-        insightsForWeather.getCurrentForecast(
+        weatherCompanyData.getCurrentForecast(
             units: units,
-            geocode: geocode,
+            latitude: latitude,
+            longitude: longitude,
             language: language,
             failure: failure) { response in
 
 		// code here
-
 })
 ```
 
 ## Authentication
 
-IBM Watson Services and Insights for Weather are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential.
+IBM Watson Services and Weather Company Data are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential.
 
 ## Build + Test
 
 ***XCode*** is used to build the project for testing and deployment.  Select Product->Build For->Testing to build the project in XCode's menu.  
 
-In order to build the project and run the unit tests, a **credentials.plist** file needs to be populated with proper credentials in order to communicate with the running Watson services.  A copy of this file is located in the project's folder under **Tests**.  The **credentials.plist** file contains a key and value for each service's user name and password.  
+In order to build the project and run the unit tests, a **credentials.swift** file needs to be populated with proper credentials in order to communicate with the running Watson services.  A copy of this file is located in the project's folder under **Tests**.  The **credentials.swift** file contains a key and value for each service's user name and password.  
 
 There are some tests already in place that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
 
