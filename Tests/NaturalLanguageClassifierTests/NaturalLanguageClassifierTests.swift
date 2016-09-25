@@ -20,9 +20,9 @@
 import Foundation
 import XCTest
 
-public class TestNaturalLanguageClassifier: XCTestCase {
+public class NaturalLanguageClassifierTests: XCTestCase {
 
-    static var allTests : [(String, (TestNaturalLanguageClassifier) -> () throws -> Void)] {
+    static var allTests : [(String, (NaturalLanguageClassifierTests) -> () throws -> Void)] {
 		return [
             ("testGetClassifiers", testGetClassifiers)
             //("testGetClassify", testGetClassify)

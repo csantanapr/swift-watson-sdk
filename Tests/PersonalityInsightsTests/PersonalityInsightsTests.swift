@@ -20,9 +20,9 @@ import XCTest
 @testable import RestKit
 import Foundation
 
-class TestPersonalityInsights: XCTestCase {
+class PersonalityInsightsTests: XCTestCase {
 
-    static var allTests : [(String, (TestPersonalityInsights) -> () throws -> Void)] {
+    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
