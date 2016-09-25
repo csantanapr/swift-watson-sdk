@@ -1,9 +1,9 @@
 import XCTest
 
 @testable import WeatherCompanyDataTests
-@testable import ToneAnalyzerTest
+@testable import ToneAnalyzerTests
 
 XCTMain([
 	testCase(WeatherCompanyDataTests.allTests),
-	testCase(ToneAnalyzerTest.allTests)
+	testCase(ToneAnalyzerTests.allTests)
 ])
