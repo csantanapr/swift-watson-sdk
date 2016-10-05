@@ -45,27 +45,23 @@ public class AlchemyLanguageTests: XCTestCase {
     /// Timeout for an asynchronous call to return before failing the unit test
     private let timeout: TimeInterval = 60.0
     
+    // api key for alchemy
     private var apiKey = ""
 
     private let testUrl = "http://arstechnica.com/gadgets/2016/05/android-instant-apps-will-blur-the-lines-between-apps-and-mobile-sites/"
     
-    private let testIBMUrl = "http://www.ibm.com/watson/"
-    
     private var testText =  "Romancing SaGa 2 is out on iOS and Android May 26, according to the game's official website. The enhanced mobile port of the Super Famicom game marks the first time the game is available in English.  Square Enix announced that the Romancing SaGa 2 remake was heading stateside in April. Alongside the English translation are revamped visuals, new classes, a gardening mini-game and a New Game Plus feature.  The role-playing game will cost $17.99 at launch. Japanese fans received the mobile port back in March, alongside a Vita release. Gamers stateside will have to make do with the version for smartphones for now. Check out the trailer for the game above to see how Romancing SaGa 2 looks in English, 23 years after its original Japanese release."
     
+    // Positive Unit Tests
     
     func testGetRankedKeywordsText() {
         
         let apiKey = Credentials.alchemyAPI
-        
         let expect = expectation(description: "Test GetRankedKeywordsText")
-        
         let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
         let failure = { (error: RestError) in print(error) }
-        
-        let input = "http://www.ibm.com"
+    
         var imputEncoded = testText.addingPercentEncoding( withAllowedCharacters: .urlHostAllowed)
-        
         var url = URL(string: imputEncoded!)
         
         alchemyLanguage.getRankedKeywords(forURL: imputEncoded!, knowledgeGraph: QueryParam.Included, sentiment: QueryParam.Included, failure: failure) { keywords in
@@ -84,15 +80,13 @@ public class AlchemyLanguageTests: XCTestCase {
         let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
         let failure = { (error: RestError) in print(error) }
         
-        alchemyLanguage.getRankedKeywords(forURL: testIBMUrl, failure: failure) { keywords in
+        alchemyLanguage.getRankedKeywords(forURL: testUrl, failure: failure) { keywords in
             XCTAssertNotNil(keywords, "Response should not be nil")
             XCTAssertNotNil(keywords.keywords, "Keywords should not be nil")
             expect.fulfill()
         }
         waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
     }
-    
-    // Positive Unit Tests
     
     func testGetAuthorsURL() {
         
@@ -300,22 +294,5 @@ public class AlchemyLanguageTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
-//    func testInvalidURL() {
-//        let description = "Use an invalid URL"
-//        let expect = expectation(description: "Test InvalidURL")
-//        
-//        let failure = { (error: RestError) in
-//            XCTAssertTrue(String(describing: error).contains("400"))
-//            expect.fulfill()
-//        }
-//        
-//        let apiKey = Credentials.alchemyAPI
-//        let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
-//    //    let failure = { (error: RestError) in print(error) }
-//        
-//        alchemyLanguage.getFeedLinks(forURL: "DOGS", failure: failure, success: failWithResult)
-//        waitForExpectations( timeout: timeout) { error in XCTAssertNil(error, "Timeout") }
-//    }
-    
+
 }
