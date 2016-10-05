@@ -14,6 +14,7 @@
 ## Table of Contents
 * [Installation](#installation)
 * [IBM Watson Services](#ibm-watson-services)
+  - [Alchemy Language](#alchemylanguage)
   - [Alchemy Vision](#alchemy-vision) (partial)
   - [Conversation](#conversation)
   - [Natural Language Classifier](#natural-language-classifier) (partial)
@@ -40,6 +41,57 @@ IBM Bluemix™ is the cloud platform in which you deploy applications that you d
 
 The IBM Bluemix documentation, specifically the pages [What is Bluemix](https://www.ng.bluemix.net/docs/)? and the [Bluemix overview](https://www.ng.bluemix.net/docs/overview/index.html).
 IBM developerWorks, specifically the [IBM Bluemix section of IBM developerWorks](https://www.ibm.com/developerworks/cloud/bluemix/) and the article that provides [An introduction to the application lifecycle on IBM Bluemix](http://www.ibm.com/developerworks/cloud/library/cl-intro-codename-bluemix-video/index.html?ca=dat).
+
+### AlchemyLanguage
+
+AlchemyLanguage is a collection of text analysis functions that derive semantic information from your content. You can input text, HTML, or a public URL and leverage sophisticated natural language processing techniques to get a quick high-level understanding of your content and obtain detailed insights such as directional sentiment from entity to object.
+
+AlchemyLanguage has a number of features, including:
+
+- Entity Extraction
+- Sentiment Analysis
+- Keyword Extraction
+- Concept Tagging
+- Relation Extraction
+- Taxonomy Classification
+- Author Extraction
+- Language Detection
+- Text Extraction
+- Microformats Parsing
+- Feed Detection
+
+##### Links
+* AlchemyVision API docs [here](http://www.ibm.com/watson/developercloud/doc/alchemylanguage/)
+* Try out the [demo](https://alchemy-language-demo.mybluemix.net/)
+
+##### Requirements
+* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
+
+##### Usage
+Instantiate an **AlchemyLanguage** object and set its api key
+
+```swift
+
+let alchemyLanguageInstance = AlchemyLanguage(apiKey: String)
+
+```
+
+
+API calls are instance methods, and model class instances are returned as part of our callback.
+
+```swift
+
+        let failure = { (error: RestError) in print(error) }
+        
+        
+        alchemyLanguage.getRankedKeywords(forURL: imputEncoded!, 
+        								  knowledgeGraph: QueryParam.Included, 
+        								  sentiment: QueryParam.Included, 
+        								  failure: failure) { keywords in
+	    		// code here
+        }
+})
+```
 
 ### Alchemy Vision
 
