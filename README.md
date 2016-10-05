@@ -61,7 +61,7 @@ AlchemyLanguage has a number of features, including:
 - Feed Detection
 
 ##### Links
-* AlchemyVision API docs [here](http://www.ibm.com/watson/developercloud/doc/alchemylanguage/)
+* Alchemy Language API docs [here](http://www.ibm.com/watson/developercloud/doc/alchemylanguage/)
 * Try out the [demo](https://alchemy-language-demo.mybluemix.net/)
 
 ##### Requirements
