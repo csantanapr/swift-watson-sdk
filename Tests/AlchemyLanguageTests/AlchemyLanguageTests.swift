@@ -24,7 +24,21 @@ public class AlchemyLanguageTests: XCTestCase {
 
     static var allTests : [(String, (AlchemyLanguageTests) -> () throws -> Void)] {
 		return [
-            ("testGetRankedKeywordsText", testGetRankedKeywordsText)
+            ("testGetRankedKeywordsText", testGetRankedKeywordsText),
+            ("testGetRankedKeywordsURL", testGetRankedKeywordsURL),
+            ("testGetAuthorsURL", testGetAuthorsURL),
+            ("testGetRankedConceptsURL", testGetRankedConceptsURL),
+            ("testGetRankedNamedEntitiesURL", testGetRankedNamedEntitiesURL),
+            ("testGetLanguageURL", testGetLanguageURL),
+            ("testGetMicroformatsURL", testGetMicroformatsURL),
+            ("testGetPubDateURL", testGetPubDateURL),
+            ("testGetTargetedSentimentURL", testGetTargetedSentimentURL),
+            ("testGetRankedTaxonomyURL", testGetRankedTaxonomyURL),
+            ("testGetRawTextURL", testGetRawTextURL),
+            ("testGetTextURL", testGetTextURL),
+            ("testGetTitleURL", testGetRankedKeywordsURL),
+            ("testDetectFeedsURL", testDetectFeedsURL),
+            ("testGetEmotionURL", testGetEmotionURL)
 	    ]
 	}
 
