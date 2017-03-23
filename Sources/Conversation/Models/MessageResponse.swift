@@ -111,7 +111,10 @@ public struct OutputData {
     
     /// An array of responses to the user.
     public let text: [String]
-    
+
+    /// An action to be taken.
+    public let action: String?
+
     /// An array of the nodes that were executed to create the response. The information is
     /// useful for debugging and for visualizing the path taken through the node tree.
     public let nodesVisited: [String]
@@ -121,6 +124,7 @@ public struct OutputData {
         logMessages = json["log_messages"].arrayValue.map(LogMessageResponse.init)
         text = json["text"].arrayValue.map {$0.string!}
         nodesVisited = json["nodes_visited"].arrayValue.map {$0.string!}
+        action = json["action"].string
     }
 }
 

@@ -25,7 +25,10 @@ public struct Context {
     
     /// A system object that includes information about the dialog.
     public let system: SystemResponse?
-    
+
+    /// Application state that is passed along to the dialog.
+    public var applicationState: [String:JSON] = [:]
+
     /**
      Create a `Context` to specify the context, or state, associated with a message.
  
@@ -41,6 +44,12 @@ public struct Context {
     public init(json: JSON) {
         conversationID = json["conversation_id"].string
         system = SystemResponse(json: json["system"])
+        json.forEach { element in
+            switch element.0 {
+            case "conversation_id", "system": break
+            default: applicationState[element.0] = element.1
+            }
+        }
     }
     
     /// Used internally to serialize a `Context` model to JSON.
@@ -48,6 +57,7 @@ public struct Context {
         var json:JSON = [:]
         if let conversationID = conversationID { json["conversation_id"].string = conversationID }
         if let system = system { json["system"] = system.toJSON() }
+        applicationState.forEach { json[$0.0] = $0.1 }
         return json
     }
 }
@@ -57,7 +67,7 @@ public struct SystemResponse {
     
     /// An array of dialog node ids that are in focus in the conversation.
     public let dialogStack: [String]
-    
+
     /// The number of cycles of user input and response in this conversation.
     public let dialogTurnCounter: Int
     
@@ -67,7 +77,9 @@ public struct SystemResponse {
     
     /// Used internally to serialize a `SystemResponse` model from JSON.
     public init(json: JSON) {
-        dialogStack = json["dialog_stack"].arrayValue.map {$0.string!}
+        dialogStack = json["dialog_stack"].arrayValue.map { node in
+            return (node.dictionaryValue["dialog_node"]?.string ?? "")
+        }
         dialogTurnCounter = json["dialog_turn_counter"].intValue
         dialogRequestCounter = json["dialog_request_counter"].intValue
     }
@@ -75,7 +87,7 @@ public struct SystemResponse {
     /// Used internally to serialize a `SystemResponse` model to JSON.
     public func toJSON() -> JSON {
         var json:JSON = [:]
-        json["dialogStack"] = JSON(dialogStack)
+        json["dialogStack"] = JSON(dialogStack.map { JSON(dictionaryLiteral: ("dialog_node", $0)) })
         json["dialog_turn_counter"] = JSON(dialogTurnCounter)
         json["dialog_request_counter"] = JSON(dialogRequestCounter)
         return json
